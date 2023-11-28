@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
+import 'package:order_app/ui/views/basket.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,6 +21,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Basket(),));
+      },),
       appBar: AppBar(title: Text("Products"),),
       body: SingleChildScrollView(
         child: Column(
@@ -34,6 +38,7 @@ class _HomeState extends State<Home> {
                     itemCount: productList.length,
                     itemBuilder: (context, index) {
                     var product = productList[index];
+                    var amount = 0;
                    return Card(
                      child:SizedBox(
 
@@ -48,6 +53,10 @@ class _HomeState extends State<Home> {
                                  Text(product.product_name,style: const TextStyle(fontSize: 20),),
                                  Text(product.product_price),
                                  Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${product.product_image}"),
+                                 TextButton(onPressed: () {
+                                   amount++;
+                                   context.read<HomeCubit>().addToBasket(product.product_name, product.product_image, product.product_price, amount.toString(), "hakan_baysal");
+                                 }, child: Text("Sepete ekle")),
                                ],
                              ),
                            ),

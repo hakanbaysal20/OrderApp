@@ -31,10 +31,16 @@ class OrderDaoRepository{
     var response = await Dio().post(url,data: FormData.fromMap(data));
     print("Add products: ${response.data.toString()}");
   }
-  Future<List<BasketModel>> getBasket(String user_name) async{
+  Future<List<BasketModel>> getBasket() async{
     var url = "http://kasimadalan.pe.hu/yemekler/sepettekiYemekleriGetir.php";
-    var data = {"kullanici_adi":user_name};
+    var data = {"kullanici_adi":"hakan_baysal"};
     var response = await Dio().post(url,data: FormData.fromMap(data));
     return parseBasketModel(response.data.toString());
+  }
+  Future<void> deleteProduct(int yemek_sepet_id,String user_name) async{
+    var url = "http://kasimadalan.pe.hu/yemekler/sepettenYemekSil.php";
+    var data = {"yemek_sepet_id":yemek_sepet_id,"kullanici_adi":user_name};
+    var response = await Dio().post(url,data: FormData.fromMap(data));
+    print("Delete product: ${response.data.toString()}");
   }
 }

@@ -7,4 +7,12 @@ class BasketCubit extends Cubit<List<BasketModel>>{
 
   var pRepo = OrderDaoRepository();
 
+  Future<void> getBasket() async{
+    var getList = await pRepo.getBasket();
+    emit(getList);
+  }
+  Future<void> deleteProduct(int yemek_sepet_id,String user_name) async{
+    await pRepo.deleteProduct(yemek_sepet_id, user_name);
+    getBasket();
+  }
 }
