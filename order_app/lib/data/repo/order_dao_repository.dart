@@ -39,7 +39,7 @@ class OrderDaoRepository{
   }
   Future<void> deleteProduct(int yemek_sepet_id,String user_name) async{
     var url = "http://kasimadalan.pe.hu/yemekler/sepettenYemekSil.php";
-    var data = {"yemek_sepet_id":yemek_sepet_id,"kullanici_adi":user_name};
+    var data = {"sepet_yemek_id":yemek_sepet_id,"kullanici_adi":user_name};
     var response = await Dio().post(url,data: FormData.fromMap(data));
     print("Delete product: ${response.data.toString()}");
   }
