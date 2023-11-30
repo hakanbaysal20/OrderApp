@@ -82,4 +82,8 @@ class OrderDaoRepository{
         print(e);
       }
   }
+
+  Future<void> changeIndicator(int value,TabController tabController) async{
+    tabController.animateTo(value);
+  }
 }

@@ -11,11 +11,11 @@ class OnboardCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 300,width: 300,child: Image.asset(model.image,alignment: Alignment.center)),
         Padding(
-          padding: const EdgeInsets.only(right: 32.0,left: 32.0),
-          child: Text(model.subtitle),
+          padding: const EdgeInsets.all(32),
+          child: Text(model.subtitle,textAlign: TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w500),),
         ),
-        Image.asset(model.image),
       ],
     );
   }
