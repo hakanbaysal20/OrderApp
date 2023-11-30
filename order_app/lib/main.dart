@@ -7,6 +7,7 @@ import 'package:order_app/ui/bloc/login_cubit.dart';
 import 'package:order_app/ui/bloc/registration_cubit.dart';
 import 'package:order_app/ui/views/home.dart';
 import 'package:order_app/ui/views/login.dart';
+import 'package:order_app/ui/views/onboard.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const Login(),
+        home: const Onboard(),
       ),
     );
   }
