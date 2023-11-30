@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:order_app/ui/bloc/login_cubit.dart';
+import 'package:order_app/ui/views/customTextField.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -10,6 +13,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,56 +36,29 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
               Image.asset("assets/images/ic_logo.png"),
-              Text("Foodi",style: TextStyle(color: Colors.white,fontFamily: 'Roboto' ,fontSize: 42)),
-              Text("Grab your favourite food",style: TextStyle(fontSize: 20,fontFamily: 'Roboto',color: Colors.white),),
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0,left: 16.0,bottom: 16.0,top: 48.0),
-                child: SizedBox(
-                  width: 340,
-                  height: 50,
-                  child: TextField(decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 15),
-                    prefixIcon: Icon(Icons.person,color: Colors.white,),
-                    hintText: "E-mail",
-                    hintStyle: TextStyle(color: Colors.white,fontSize: 18),
-                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 2),borderRadius: BorderRadius.circular(37)),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(37)),
-                    ),
-                  ),
-                ),
+              const Text("Foodi",style: TextStyle(color: Colors.white,fontFamily: 'Roboto' ,fontSize: 42,fontWeight: FontWeight.w500)),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 16.0),
+                child: Text("Grab your favourite food",style: TextStyle(fontSize: 20,fontFamily: 'Roboto',color: Colors.white,fontWeight: FontWeight.w500),),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0,left: 16.0,top: 16.0,bottom: 32.0),
-                child: SizedBox(
-                  height: 50,
-                  width: 340,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 15),
-                      prefixIcon: Icon(Icons.lock,color: Colors.white,),
-                      hintText: "Password",
-                      hintStyle: TextStyle(color: Colors.white),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(37)),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 2),borderRadius: BorderRadius.circular(37)),
-                    ),
-                  ),
-                ),
-              ),
+              CustomTextField(obscureText: false, hintText: "E-mail", icon: const Icon(Icons.mail_outline,color: Colors.white),controller: emailController,),
+              CustomTextField(obscureText: true, hintText: "Password", icon: const Icon(Icons.lock_outline,color: Colors.white,),controller: passwordController),
               TextButton(onPressed: () {
-              },
-                  style: TextButton.styleFrom(backgroundColor: Colors.white,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(37))),
-                  child: Container(width: 300,child: Text("Login",style: TextStyle(color: Color(0xFFFE5045)),textAlign: TextAlign.center))),
-              SizedBox(height: 50,),
+                context.read<LoginCubit>().login(emailController.text, passwordController.text, context);
+
+              },style: TextButton.styleFrom(backgroundColor: Colors.white,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(37))),
+                  child: Container(width: 300,child: const Text("Login",style: TextStyle(color: Color(0xFFFE5045),fontFamily: 'Roboto',fontSize: 16),textAlign: TextAlign.center))),
+              const SizedBox(height: 50,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("Dont have an account?",style: TextStyle(color: Colors.white,fontSize: 20),),
+                  const Text("Dont have an account?",style: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto',fontWeight: FontWeight.normal),),
                   TextButton(onPressed: () {
 
-                  }, child: Text("Sign up",style: TextStyle(color: Colors.white,fontSize: 20),))
+                  }, child: const Text("Sign up",style: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto',fontWeight: FontWeight.normal),))
 
                 ],
               ),
@@ -92,3 +70,4 @@ class _LoginState extends State<Login> {
     );
   }
 }
+

@@ -1,11 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/ui/bloc/basket_cubit.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
+import 'package:order_app/ui/bloc/login_cubit.dart';
 import 'package:order_app/ui/views/home.dart';
 import 'package:order_app/ui/views/login.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -19,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(create: (context) => BasketCubit()),
+        BlocProvider(create: (context) => LoginCubit(),),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
