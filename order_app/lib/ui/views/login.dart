@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/ui/bloc/login_cubit.dart';
 import 'package:order_app/ui/views/customTextField.dart';
+import 'package:order_app/ui/views/registration.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -57,7 +58,7 @@ class _LoginState extends State<Login> {
                 children: [
                   const Text("Dont have an account?",style: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto',fontWeight: FontWeight.normal),),
                   TextButton(onPressed: () {
-
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Registration(),));
                   }, child: const Text("Sign up",style: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Roboto',fontWeight: FontWeight.normal),))
 
                 ],
