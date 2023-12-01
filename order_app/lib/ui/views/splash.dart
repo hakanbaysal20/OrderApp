@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:order_app/constants/color_constants.dart';
 import 'package:order_app/ui/views/lottie/lottie_widget.dart';
+import 'package:order_app/ui/views/onboard.dart';
 
 
 class Splash extends StatefulWidget {
@@ -56,6 +57,7 @@ class _SplashState extends State<Splash> {
       opacity: imageOpacity,
       duration: Duration(seconds: 2),
       child: LottieCustomWidget("$animateJson"),
+      onEnd: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Onboard(),)),
     );
   }
 }

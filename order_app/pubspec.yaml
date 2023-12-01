@@ -68,6 +68,9 @@ flutter:
         - asset: assets/fonts/Roboto.ttf
         - asset: assets/fonts/Roboto-Medium.ttf
           weight: 500
+    - family: SansPro
+      fonts:
+        - asset: assets/fonts/SansProSB.ttf
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

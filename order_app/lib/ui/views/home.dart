@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var tf = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -24,10 +25,38 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => Basket(),));
       },),
-      appBar: AppBar(title: Text("Products"),),
+      appBar: AppBar(automaticallyImplyLeading: false,title: Text("Food & Drinks",style: TextStyle(fontSize: 26,fontFamily: 'SansPro',fontWeight: FontWeight.w500),),),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: 316,
+                  height: 50,
+                  child: TextField(
+                      controller: tf,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xFFF4F6F9),
+                        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        suffixIcon: Icon(Icons.search),
+                        hintText: "search",
+                        hintStyle: TextStyle(color: Color(0xFF09101D),fontSize: 18,fontFamily: 'SansPro'),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white),borderRadius: BorderRadius.circular(37)),
+                        border: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFFF4F6F9)),borderRadius: BorderRadius.circular(37)),
+                      ),
+                    ),
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Color(0xFFF43F5E).withOpacity(0.1),borderRadius: BorderRadius.all(Radius.circular(12))),
+                  width: 50,
+                  height: 50,
+                  child: Icon(Icons.filter_list_outlined,color: Color(0xFFF43F5E),),
+                ),
+              ],
+            ),
             BlocBuilder<HomeCubit,List<ProductModel>>(
               builder: (context, productList) {
                 if(productList.isNotEmpty){
@@ -41,7 +70,6 @@ class _HomeState extends State<Home> {
                     var amount = 0;
                    return Card(
                      child:SizedBox(
-
                        child: Row(
                          children: [
                            Padding(
@@ -60,18 +88,9 @@ class _HomeState extends State<Home> {
                                ],
                              ),
                            ),
-
-
                          ],
                        ),
                      ),
-
-                     /* ListTile(
-                      subtitle: Text(kisi.kisi_tel),
-                      title: Text(kisi.kisi_adi),
-                      trailing: Icon(Icons.close),
-
-                    ),*/
                    );
 
                   },);
@@ -79,7 +98,6 @@ class _HomeState extends State<Home> {
                   print("aisdşasd");
                   return Center();
                 }
-
             },),
           ],
         ),

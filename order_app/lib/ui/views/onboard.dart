@@ -6,18 +6,15 @@ import 'package:order_app/ui/bloc/onboard_cubit.dart';
 import 'package:order_app/ui/views/login.dart';
 import 'package:order_app/ui/views/onboard_card.dart';
 
-
 class Onboard extends StatefulWidget {
   const Onboard({Key? key}) : super(key: key);
 
   @override
   State<Onboard> createState() => _OnboardState();
 }
-
 class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
   late final TabController tabController;
   int selectIndex = 0;
-  var control = false;
   @override
   void initState() {
     super.initState();
@@ -38,22 +35,13 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
              width: double.infinity,
              height: 420,
              child: PageView.builder(
-
                onPageChanged: (value) {
                  setState(() {
-
                  });
                  context.read<OnboardCubit>().changeIndicator(value, tabController);
                },
                itemCount: OnboardList.onboardItems.length,
                itemBuilder: (context, index) {
-                 var lastIndex = OnboardList.onboardItems.last;
-                 if(lastIndex == index){
-                     control = true;
-                   }else{
-                     control = false;
-                   }
-
                  return OnboardCard(OnboardList.onboardItems[index],
                     );
                  },),
@@ -64,13 +52,12 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
                color: Colors.black54,
                controller: tabController,
              ),
-            SizedBox(height: 80),
-            Visibility(
-              visible: control,
-              child: TextButton(onPressed: () {
+            const SizedBox(height: 80),
+           TextButton(onPressed: () {
+             Navigator.push(context, MaterialPageRoute(builder: (context) => const Login(),));
               },style: TextButton.styleFrom(backgroundColor: ColorConstants.white,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(37))),
-                  child: Container(width: 150,child: const Text("Get a meal",style: TextStyle(color: ColorConstants.buttonTextColor,fontFamily: 'Roboto',fontSize: 16),textAlign: TextAlign.center))),
-            ),
+                  child: const SizedBox(width: 150,child: Text("Get a meal",style: TextStyle(color: ColorConstants.buttonTextColor,fontFamily: 'Roboto',fontSize: 16),textAlign: TextAlign.center))),
+
 
           ],
         ),
