@@ -13,5 +13,8 @@ class HomeCubit extends Cubit<List<ProductModel>>{
   Future<void> addToBasket(String product_name,String product_image_name,String product_price, String product_order_amount,String user_name) async{
     await pRepo.addToBasket(product_name, product_image_name, product_price, product_order_amount, user_name);
   }
-
+  Future<void> search() async{
+    var list = await pRepo.search();
+    emit(list);
+  }
 }

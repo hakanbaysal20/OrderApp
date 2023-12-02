@@ -59,7 +59,6 @@ class OrderDaoRepository{
     }
   }
   Future<void> registration(BuildContext context,String email,String password,String passwordAgain) async{
-
       try{
         if(password == passwordAgain){
           UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
@@ -82,7 +81,14 @@ class OrderDaoRepository{
         print(e);
       }
   }
+  Future<List<ProductModel>> search() async{
+    final dio = Dio();
+    var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
+    var response = await dio.get(url,queryParameters: {'yemek_id':5});
+    print(response.data.toString());
+    return parseProductResponse(response.data.toString());
 
+  }
   Future<void> changeIndicator(int value,TabController tabController) async{
     tabController.animateTo(value);
   }

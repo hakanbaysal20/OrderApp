@@ -34,7 +34,7 @@ class _SplashState extends State<Splash> {
         decoration: BoxDecoration(gradient: LinearGradient(colors: [ColorConstants.gradientColor , ColorConstants.gradientColorLight])),
         child: Column(
           children: [
-            buildAnimatedOpacityLottie("splash"),
+            buildAnimatedOpacityLottie("splash_anim"),
 
             Text("Hello",style: TextStyle(fontFamily: 'Roboto',fontSize: 20,fontWeight: FontWeight.w500,color: ColorConstants.white),),
             Spacer(),
