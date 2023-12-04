@@ -20,6 +20,8 @@ class OrderDaoRepository{
   }
   var collectionUser = FirebaseFirestore.instance.collection("Users");
   var auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
+
 
   Future<List<ProductModel>> getProduct() async {
     var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
@@ -87,6 +89,17 @@ class OrderDaoRepository{
     print(response.data.toString());
     return parseProductResponse(response.data.toString());
 
+  }
+  Future<void> saveAdress(String adress_name, String adress_city,String adress_district,String adress_directions) async{
+    var userId = FirebaseAuth.instance.currentUser!.uid;
+    final collectionAdress = firestore.collection("Users").doc(userId).collection("Address");
+    var newAdress = HashMap<String,dynamic>();
+    newAdress["adress_id"] = "";
+    newAdress["adress_name"] = adress_name;
+    newAdress["adress_city"] = adress_city;
+    newAdress["adress_district"] = adress_district;
+    newAdress["adress_directions"] = adress_directions;
+    collectionAdress.add(newAdress);
   }
   Future<void> changeIndicator(int value,TabController tabController) async{
     tabController.animateTo(value);

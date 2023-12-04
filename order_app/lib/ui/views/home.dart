@@ -4,6 +4,7 @@ import 'package:order_app/constants/color_constants.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
 import 'package:order_app/ui/views/basket.dart';
+import 'package:order_app/ui/views/product_details.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -83,11 +84,12 @@ class _HomeState extends State<Home> {
                     itemBuilder: (context, index) {
                       var product = productList[index];
                       return Padding(
-                        padding: const EdgeInsets.only(right: 24,left: 24,bottom: 24),
+                        padding: const EdgeInsets.only(right: 24,left: 24,bottom: 12,top: 12),
                         child: SizedBox(
                           height: 88,
                           child: GestureDetector(
                             onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails(product: product),));
                             },
                             child: Card(
                               child: Container(
