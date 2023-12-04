@@ -14,24 +14,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var tf = TextEditingController();
-
   @override
   void initState() {
     super.initState();
     context.read<HomeCubit>().loadProducts();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Basket()));
-        },
-      ),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           "Food & Drinks",
           style: TextStyle(fontSize: 26, fontFamily: 'SansPro', fontWeight: FontWeight.w500),
         ),
@@ -52,17 +46,17 @@ class _HomeState extends State<Home> {
                     },
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color(0xFFF4F6F9),
-                      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                      suffixIcon: Icon(Icons.search),
+                      fillColor: const Color(0xFFF4F6F9),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      suffixIcon: const Icon(Icons.search),
                       hintText: "Search",
-                      hintStyle: TextStyle(color: Color(0xFF09101D), fontSize: 18, fontFamily: 'SansPro'),
+                      hintStyle: const TextStyle(color: Color(0xFF09101D), fontSize: 18, fontFamily: 'SansPro'),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(37),
                       ),
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFFF4F6F9)),
+                        borderSide: const BorderSide(color: Color(0xFFF4F6F9)),
                         borderRadius: BorderRadius.circular(37),
                       ),
                     ),
@@ -70,12 +64,12 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: Color(0xFFF43F5E).withOpacity(0.1),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    color: const Color(0xFFF43F5E).withOpacity(0.1),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
                   ),
                   width: 50,
                   height: 50,
-                  child: Icon(Icons.filter_list_outlined, color: Color(0xFFF43F5E)),
+                  child: const Icon(Icons.filter_list_outlined, color: Color(0xFFF43F5E)),
                 ),
               ],
             ),
@@ -84,81 +78,62 @@ class _HomeState extends State<Home> {
                 if (productList.isNotEmpty) {
                   return ListView.builder(
                     shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: productList.length,
                     itemBuilder: (context, index) {
                       var product = productList[index];
-                      var amount = 0;
                       return Padding(
-                        padding: const EdgeInsets.only(right: 24,left: 24),
+                        padding: const EdgeInsets.only(right: 24,left: 24,bottom: 24),
                         child: SizedBox(
                           height: 88,
-                          child: Card(
-                            child:  Padding(
-                              padding: const EdgeInsets.only(right: 12, left: 12),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 64,
-                                    width: 64,
-                                    child: Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${product.product_image}"),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                          child: GestureDetector(
+                            onTap: () {
+                            },
+                            child: Card(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.05), blurRadius: 1),
+                                  ],
+                                ),
+                                child:  Padding(
+                                  padding: const EdgeInsets.only(right: 12, left: 12),
+                                  child: Row(
                                     children: [
-                                      Text(product.product_name,style: TextStyle(fontSize: 18,fontFamily: 'SansPro',fontWeight: FontWeight.w500),),
-                                      Text("Loovy food",style: TextStyle(fontSize: 14,fontFamily: 'SansPro',color: Colors.black54),),
+                                      SizedBox(
+                                          height: 64,
+                                          width: 64,
+                                          child: Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${product.product_image}")),
+                                      const SizedBox(width: 10),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(product.product_name,style: const TextStyle(fontSize: 18,fontFamily: 'SansPro',fontWeight: FontWeight.w500),),
+                                          const Text("Loovy food",style: TextStyle(fontSize: 14,fontFamily: 'SansPro',color: Colors.black54),),
+                                        ],
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        "₺${product.product_price}",
+                                        style: const TextStyle(fontSize: 29,fontFamily: 'SansPro',
+                                            fontWeight: FontWeight.w500,color: ColorConstants.priceColor),),
                                     ],
                                   ),
-                                  Text("₺ ${product.product_price}",style: TextStyle(fontSize: 29,fontFamily: 'SansPro',fontWeight: FontWeight.w500,color: ColorConstants.priceColor),),
-
-                                ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                       );
 
-
-                      /* Card(
-                        child: SizedBox(
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(product.product_name, style: const TextStyle(fontSize: 20)),
-                                    Text(product.product_price),
-                                    Image.network(
-                                        "http://kasimadalan.pe.hu/yemekler/resimler/${product.product_image}"),
-                                    TextButton(
-                                      onPressed: () {
-                                        amount++;
-                                        context.read<HomeCubit>().addToBasket(
-                                            product.product_name,
-                                            product.product_image,
-                                            product.product_price,
-                                            amount.toString(),
-                                            "hakan_baysal");
-                                      },
-                                      child: Text("Sepete ekle"),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );*/
                     },
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: Text("No results found."),
                   );
                 }

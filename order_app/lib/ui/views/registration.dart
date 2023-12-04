@@ -26,10 +26,7 @@ class _RegistrationState extends State<Registration> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              ColorConstants.gradientColor,
-              ColorConstants.gradientColorLight,
-            ],
+            colors: ColorConstants.linearColor,
           ),
         ),
         child: SingleChildScrollView(

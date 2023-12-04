@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:order_app/constants/color_constants.dart';
 import 'package:order_app/ui/views/lottie/lottie_widget.dart';
-import 'package:order_app/ui/views/onboard.dart';
+import 'package:order_app/ui/views/onboard/onboard.dart';
 
 
 class Splash extends StatefulWidget {
@@ -31,7 +31,7 @@ class _SplashState extends State<Splash> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(gradient: LinearGradient(colors: [ColorConstants.gradientColor , ColorConstants.gradientColorLight])),
+        decoration: const BoxDecoration(gradient: LinearGradient(colors: ColorConstants.linearColor)),
         child: Column(
           children: [
             buildAnimatedOpacityLottie("splash_anim"),

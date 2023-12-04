@@ -36,6 +36,7 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   equatable:
+  google_nav_bar:
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -4,12 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:order_app/bottom_nav_bar.dart';
 import 'package:order_app/data/entity/basket_model.dart';
 import 'package:order_app/data/entity/basket_response.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/data/entity/product_response.dart';
-import 'package:order_app/ui/views/bottom_nav_bar.dart';
-import 'package:order_app/ui/views/home.dart';
 
 class OrderDaoRepository{
 
@@ -53,7 +52,7 @@ class OrderDaoRepository{
   Future<void> login(String email,String password,BuildContext context) async{
     try{
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home(),));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
     }catch (e) {
       print("Error");
     }
@@ -66,7 +65,7 @@ class OrderDaoRepository{
           newUser["user_email"] = email;
           newUser["user_password"] = password;
           collectionUser.add(newUser);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home(),));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
         }else{
           print("passwords do not match");
         }

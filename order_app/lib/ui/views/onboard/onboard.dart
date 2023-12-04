@@ -4,7 +4,7 @@ import 'package:order_app/constants/color_constants.dart';
 import 'package:order_app/data/entity/onboard_model.dart';
 import 'package:order_app/ui/bloc/onboard_cubit.dart';
 import 'package:order_app/ui/views/login.dart';
-import 'package:order_app/ui/views/onboard_card.dart';
+import 'package:order_app/ui/views/onboard/onboard_card.dart';
 
 class Onboard extends StatefulWidget {
   const Onboard({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(gradient: LinearGradient(colors: [ColorConstants.gradientColor, ColorConstants.gradientColorLight ])),
+        decoration: const BoxDecoration(gradient: LinearGradient(colors: ColorConstants.linearColor)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

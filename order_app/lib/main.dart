@@ -8,7 +8,7 @@ import 'package:order_app/ui/bloc/onboard_cubit.dart';
 import 'package:order_app/ui/bloc/registration_cubit.dart';
 import 'package:order_app/ui/views/home.dart';
 import 'package:order_app/ui/views/login.dart';
-import 'package:order_app/ui/views/onboard.dart';
+import 'package:order_app/ui/views/onboard/onboard.dart';
 import 'package:order_app/ui/views/splash.dart';
 
 void main() async{
