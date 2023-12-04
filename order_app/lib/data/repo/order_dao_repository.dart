@@ -104,4 +104,15 @@ class OrderDaoRepository{
   Future<void> changeIndicator(int value,TabController tabController) async{
     tabController.animateTo(value);
   }
+
+
+ // Product Details Cubit
+  Future<int> increase(int number) async{
+    var total = number + 1;
+    return total;
+  }
+  Future<int> decrease(int number) async{
+    var total = number - 1;
+    return total;
+  }
 }

@@ -5,6 +5,7 @@ import 'package:order_app/ui/bloc/basket_cubit.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
 import 'package:order_app/ui/bloc/login_cubit.dart';
 import 'package:order_app/ui/bloc/onboard_cubit.dart';
+import 'package:order_app/ui/bloc/product_details_cubit.dart';
 import 'package:order_app/ui/bloc/registration_cubit.dart';
 import 'package:order_app/ui/views/home.dart';
 import 'package:order_app/ui/views/login.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => RegistrationCubit()),
         BlocProvider(create: (context) => OnboardCubit()),
+        BlocProvider(create: (context) => ProductDetailsCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
