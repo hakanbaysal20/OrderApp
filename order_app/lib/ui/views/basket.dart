@@ -19,8 +19,8 @@ class _BasketState extends State<Basket> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Basket"),),
-      body:   BlocBuilder<BasketCubit,List<BasketModel>>(
+      appBar: AppBar(automaticallyImplyLeading: false,title: Text("Basket"),),
+      body: BlocBuilder<BasketCubit,List<BasketModel>>(
         builder: (context, productList) {
           if(productList.isNotEmpty){
             print("as");

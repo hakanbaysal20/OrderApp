@@ -14,4 +14,7 @@ class ProductDetailsCubit extends Cubit<int>{
     var value = await kRepo.decrease(number);
     emit(value);
   }
+  Future<void> addToBasket(String product_name,String product_image_name,String product_price, String product_order_amount,String user_name) async{
+    await kRepo.addToBasket(product_name, product_image_name, product_price, product_order_amount, user_name);
+  }
 }
