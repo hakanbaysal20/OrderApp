@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/ui/bloc/splash_cubit.dart';
 import 'package:order_app/ui/views/lottie/lottie_widget.dart';
 import 'package:order_app/ui/views/onboard/onboard.dart';
 
@@ -51,13 +53,14 @@ class _SplashState extends State<Splash> {
       ),
     );
   }
-
   Widget buildAnimatedOpacityLottie(String animateJson){
     return AnimatedOpacity(
       opacity: imageOpacity,
-      duration: Duration(seconds: 2),
+      duration: Duration(seconds: 3),
       child: LottieCustomWidget("$animateJson"),
-      onEnd: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Onboard(),)),
+      onEnd:() {
+        context.read<SplashCubit>().checkUserLoginStatus(context);
+      },
     );
   }
 }

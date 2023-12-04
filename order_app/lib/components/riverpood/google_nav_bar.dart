@@ -27,7 +27,7 @@ class GoogleNavBar extends StatelessWidget {
         style: GnavStyle.google,
         tabBackgroundColor: ColorConstants.priceColor.withOpacity(0.1),
         tabBorderRadius: 12,
-        curve: Curves.ease,
+        curve: Curves.ease.flipped,
         tabs: const [
           GButton(padding: EdgeInsets.all(10),icon: Icons.home,text: "Home",iconColor: ColorConstants.priceColor),
           GButton(padding: EdgeInsets.all(10),icon: Icons.shopping_basket,text: "Basket",iconColor: ColorConstants.priceColor,),

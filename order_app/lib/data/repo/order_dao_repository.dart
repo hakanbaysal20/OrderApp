@@ -9,6 +9,7 @@ import 'package:order_app/data/entity/basket_model.dart';
 import 'package:order_app/data/entity/basket_response.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/data/entity/product_response.dart';
+import 'package:order_app/ui/views/onboard/onboard.dart';
 
 class OrderDaoRepository{
 
@@ -114,5 +115,13 @@ class OrderDaoRepository{
   Future<int> decrease(int number) async{
     var total = number - 1;
     return total;
+  }
+  Future<void> checkUserLoginStatus(BuildContext context) async{
+    var user = auth.currentUser;
+    if(user != null){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+    }else{
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Onboard(),));
+    }
   }
 }
