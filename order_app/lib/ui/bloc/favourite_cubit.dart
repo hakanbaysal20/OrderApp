@@ -30,4 +30,4 @@ class FavouriteCubit extends Cubit<List<FavouriteModel>>{
 
 }
 
-/// liste şeklinde product detaiils cubit hazır bro gelince bool değeri döndür
+/// liste şeklinde product details cubit hazır bro gelince bool değeri döndür

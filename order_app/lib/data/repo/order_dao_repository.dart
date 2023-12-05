@@ -145,33 +145,37 @@ class OrderDaoRepository{
     }
   }
   // Favourite Process
-  Future<void> checkFavourite(bool checkFavourite,product_id) async{
+  Future<bool> checkFavourite(product_id) async{
+    var checkFavourite = false;
     final collectionFavourites = firestore.collection("Favourites");
     QuerySnapshot querySnapshot = await collectionFavourites.where("product_id",isEqualTo: product_id).get();
     if(querySnapshot.docs.isNotEmpty){
       print("dolu");
-      checkFavourite = true;
+      return checkFavourite = true;
     }else{
-      checkFavourite = false;
+      return checkFavourite = false;
     }
   }
-  Future<void> saveFavourite(String product_name,String product_image_name,String product_id) async{
+  Future<bool> saveFavourite(String product_name,String product_image_name,String product_id,bool statusFavourite) async{
     var userId = FirebaseAuth.instance.currentUser!.uid;
     final collectionFavourites = firestore.collection("Favourites");
-    var favouriteProduct = HashMap<String,dynamic>();
-    collectionFavourites.where("product_id",isEqualTo: product_id);
-    favouriteProduct["product_name"] = product_name;
-    favouriteProduct["product_id"] = product_id;
-    favouriteProduct["user_id"] = userId;
-    favouriteProduct["product_image_url"] = "http://kasimadalan.pe.hu/yemekler/resimler/$product_image_name";
-    collectionFavourites.add(favouriteProduct);
-  }
-  Future<void> deleteFavourite(String product_id) async{
-    var userId = FirebaseAuth.instance.currentUser!.uid;
-    final collectionFavourites = firestore.collection("Favourites");
-    QuerySnapshot querySnapshot = await collectionFavourites.where('user_id',isEqualTo: userId).where('product_id',isEqualTo: product_id).get();
+    QuerySnapshot querySnapshot = await collectionFavourites.where("product_id",isEqualTo: product_id).get();
     if(querySnapshot.docs.isNotEmpty){
-      await collectionFavourites.doc(querySnapshot.docs[0].id).delete();
+      statusFavourite = true;
+      collectionFavourites.doc(querySnapshot.docs[0].id).delete();
+      return statusFavourite = true;
+    }else{
+      final collectionFavourites = firestore.collection("Favourites");
+      var favouriteProduct = HashMap<String,dynamic>();
+      collectionFavourites.where("product_id",isEqualTo: product_id);
+      favouriteProduct["product_name"] = product_name;
+      favouriteProduct["product_id"] = product_id;
+      favouriteProduct["user_id"] = userId;
+      favouriteProduct["product_image_url"] = "http://kasimadalan.pe.hu/yemekler/resimler/$product_image_name";
+      collectionFavourites.add(favouriteProduct);
+      return statusFavourite = false;
     }
+
   }
+
 }

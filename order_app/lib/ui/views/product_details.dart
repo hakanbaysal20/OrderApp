@@ -16,13 +16,9 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  bool checkFavourite = false;
   @override
   void initState() {
     super.initState();
-    context.read<ProductDetailsCubit>().checkFavourite(checkFavourite, widget.product.product_id);
-    print(checkFavourite);
-
   }
 
   @override
@@ -48,24 +44,23 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                  Padding(
                   padding: EdgeInsets.only(left: 20,right: 20,top: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(onPressed: () {
-                        Navigator.pop(context);
-                      }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
-                      IconButton(onPressed: () {
-                        setState(() {
-                          if(checkFavourite == false){
-                            context.read<ProductDetailsCubit>().saveFavourite(widget.product.product_name, widget.product.product_image, widget.product.product_id);
-                            checkFavourite = true;
-                          }else{
-                            context.read<ProductDetailsCubit>().deleteFavourite(widget.product.product_id);
-                            checkFavourite = false;
-                          }
-                        });
-                      }, icon:Icon(Icons.favorite),color: checkFavourite ? ColorConstants.priceColor : ColorConstants.grey),
-                    ],
+                  child: BlocBuilder<ProductDetailsCubit,ListType>(
+                    builder: (context,state) {
+                      var checkFavourite = state.checkFavourite;
+                      print(checkFavourite);
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(onPressed: () {
+                            Navigator.pop(context);
+                          }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
+                          IconButton(onPressed: () {
+                            context.read<ProductDetailsCubit>().saveFavourite(widget.product.product_name, widget.product.product_image, widget.product.product_id,checkFavourite);
+
+                          }, icon:Icon(Icons.favorite),color: checkFavourite ? ColorConstants.priceColor :  ColorConstants.grey),
+                        ],
+                      );
+                    }
                   ),
                 ),
                 Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${widget.product.product_image}"),
@@ -94,7 +89,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         Container(
                           width: 50,
                           color: const Color(0xFFC4C4C4).withOpacity(0.6),
-                          child: Text(state.toString(),textAlign: TextAlign.center,style: const TextStyle(fontFamily: 'SansPro',color: Colors.grey)),
+                          child: Text(value.toString(),textAlign: TextAlign.center,style: const TextStyle(fontFamily: 'SansPro',color: Colors.grey)),
                         ),
                         IconButton(onPressed: () {
                           setState(() {
@@ -162,7 +157,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 var product= widget.product;
                 return GestureDetector(
                   onTap: () {
-                    context.read<ProductDetailsCubit>().addToBasket(product.product_name, product.product_image, product.product_price, number.toString(), "hakan_baysal");
+                    context.read<ProductDetailsCubit>().addToBasket(product.product_name, product.product_image, product.product_price, num.toString(), "hakan_baysal");
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -175,7 +170,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("$number items",style: TextStyle(color: ColorConstants.white,fontSize: 16,fontWeight: FontWeight.w500,fontFamily: 'SansPro')),
+                              Text("$num items",style: TextStyle(color: ColorConstants.white,fontSize: 16,fontWeight: FontWeight.w500,fontFamily: 'SansPro')),
                               Text("₺ $total",style: TextStyle(color: ColorConstants.white,fontSize: 24,fontFamily: 'SansPro',fontWeight: FontWeight.w500)),
 
                                   ],

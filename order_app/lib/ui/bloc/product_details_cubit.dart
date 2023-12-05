@@ -19,13 +19,9 @@ class ProductDetailsCubit extends Cubit<ListType>{
   Future<void> addToBasket(String product_name,String product_image_name,String product_price, String product_order_amount,String user_name) async{
     await kRepo.addToBasket(product_name, product_image_name, product_price, product_order_amount, user_name);
   }
-  Future<void> saveFavourite(String product_name , String product_image_name,String product_id) async{
-    await kRepo.saveFavourite(product_name, product_image_name, product_id);
+  Future<void> saveFavourite(String product_name , String product_image_name,String product_id,bool statusFavourite) async{
+    var value = await kRepo.saveFavourite(product_name, product_image_name, product_id,statusFavourite);
+    emit(state.copyWith(checkFavourite: value));
   }
-  Future<void> deleteFavourite(String product_id) async{
-    await kRepo.deleteFavourite(product_id);
-  }
-  Future<void> checkFavourite(bool checkFavourite, String product_id) async{
-    await kRepo.checkFavourite(checkFavourite, product_id);
-  }
+
 }
