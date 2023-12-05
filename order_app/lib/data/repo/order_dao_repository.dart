@@ -58,6 +58,10 @@ class OrderDaoRepository{
     var response = await Dio().post(url,data: FormData.fromMap(data));
     return parseBasketModel(response.data.toString());
   }
+  Future<int> totalPrice(int product_amount, int product_price) async{
+    var total = product_amount * product_price;
+    return total;
+  }
   Future<void> login(String email,String password,BuildContext context) async{
     try{
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
@@ -138,9 +142,36 @@ class OrderDaoRepository{
     }else{
       await preferences.setBool('seen', true);
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Onboard(),));
-
     }
   }
-
-
+  // Favourite Process
+  Future<void> checkFavourite(bool checkFavourite,product_id) async{
+    final collectionFavourites = firestore.collection("Favourites");
+    QuerySnapshot querySnapshot = await collectionFavourites.where("product_id",isEqualTo: product_id).get();
+    if(querySnapshot.docs.isNotEmpty){
+      print("dolu");
+      checkFavourite = true;
+    }else{
+      checkFavourite = false;
+    }
+  }
+  Future<void> saveFavourite(String product_name,String product_image_name,String product_id) async{
+    var userId = FirebaseAuth.instance.currentUser!.uid;
+    final collectionFavourites = firestore.collection("Favourites");
+    var favouriteProduct = HashMap<String,dynamic>();
+    collectionFavourites.where("product_id",isEqualTo: product_id);
+    favouriteProduct["product_name"] = product_name;
+    favouriteProduct["product_id"] = product_id;
+    favouriteProduct["user_id"] = userId;
+    favouriteProduct["product_image_url"] = "http://kasimadalan.pe.hu/yemekler/resimler/$product_image_name";
+    collectionFavourites.add(favouriteProduct);
+  }
+  Future<void> deleteFavourite(String product_id) async{
+    var userId = FirebaseAuth.instance.currentUser!.uid;
+    final collectionFavourites = firestore.collection("Favourites");
+    QuerySnapshot querySnapshot = await collectionFavourites.where('user_id',isEqualTo: userId).where('product_id',isEqualTo: product_id).get();
+    if(querySnapshot.docs.isNotEmpty){
+      await collectionFavourites.doc(querySnapshot.docs[0].id).delete();
+    }
+  }
 }

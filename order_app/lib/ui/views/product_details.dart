@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/data/entity/list_type.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/ui/bloc/product_details_cubit.dart';
 
@@ -15,6 +16,14 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  bool checkFavourite = false;
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProductDetailsCubit>().checkFavourite(checkFavourite, widget.product.product_id);
+    print(checkFavourite);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +54,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                       IconButton(onPressed: () {
                         Navigator.pop(context);
                       }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
-                      Icon(Icons.favorite,color: ColorConstants.grey),
+                      IconButton(onPressed: () {
+                        setState(() {
+                          if(checkFavourite == false){
+                            context.read<ProductDetailsCubit>().saveFavourite(widget.product.product_name, widget.product.product_image, widget.product.product_id);
+                            checkFavourite = true;
+                          }else{
+                            context.read<ProductDetailsCubit>().deleteFavourite(widget.product.product_id);
+                            checkFavourite = false;
+                          }
+                        });
+                      }, icon:Icon(Icons.favorite),color: checkFavourite ? ColorConstants.priceColor : ColorConstants.grey),
                     ],
                   ),
                 ),
@@ -61,13 +80,14 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 Text(widget.product.product_name,style: const TextStyle(fontFamily: 'SansPro',fontSize: 24,color: ColorConstants.grey),),
                 SizedBox(
-                  child: BlocBuilder<ProductDetailsCubit,int>(
+                  child: BlocBuilder<ProductDetailsCubit,ListType>(
                     builder: (context,state) {
+                      var value = state.productAmount;
                       return Row(
                       children: [
                         IconButton(onPressed: () {
                           setState(() {
-                            context.read<ProductDetailsCubit>().decrease(state);
+                            context.read<ProductDetailsCubit>().decrease(value);
 
                           });
                         }, icon: const Icon(CupertinoIcons.minus_square_fill,color: ColorConstants.grey,)),
@@ -78,7 +98,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                         IconButton(onPressed: () {
                           setState(() {
-                            context.read<ProductDetailsCubit>().increase(state);
+                            context.read<ProductDetailsCubit>().increase(value);
 
                           });
                         }, icon: const Icon(CupertinoIcons.plus_square_fill,color: Colors.red,)),
@@ -135,9 +155,10 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16,left: 16),
-            child: BlocBuilder<ProductDetailsCubit,int>(
+            child: BlocBuilder<ProductDetailsCubit,ListType>(
               builder: (context,number) {
-                var total = int.parse(widget.product.product_price) * number;
+                var num = number.productAmount;
+                var total = int.parse(widget.product.product_price) * num;
                 var product= widget.product;
                 return GestureDetector(
                   onTap: () {

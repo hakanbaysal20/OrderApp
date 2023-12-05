@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
-import 'package:order_app/ui/views/basket.dart';
 import 'package:order_app/ui/views/product_details.dart';
 
 class Home extends StatefulWidget {

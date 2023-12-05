@@ -1,18 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/bottom_nav_bar.dart';
 import 'package:order_app/ui/bloc/basket_cubit.dart';
+import 'package:order_app/ui/bloc/favourite_cubit.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
 import 'package:order_app/ui/bloc/login_cubit.dart';
 import 'package:order_app/ui/bloc/onboard_cubit.dart';
 import 'package:order_app/ui/bloc/product_details_cubit.dart';
 import 'package:order_app/ui/bloc/registration_cubit.dart';
 import 'package:order_app/ui/bloc/splash_cubit.dart';
-import 'package:order_app/ui/views/home.dart';
-import 'package:order_app/ui/views/login.dart';
-import 'package:order_app/ui/views/onboard/onboard.dart';
-import 'package:order_app/ui/views/registration.dart';
+
 import 'package:order_app/ui/views/splash.dart';
 
 void main() async{
@@ -36,6 +33,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OnboardCubit()),
         BlocProvider(create: (context) => ProductDetailsCubit()),
         BlocProvider(create: (context) => SplashCubit()),
+        BlocProvider(create: (context) => FavouriteCubit(),),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

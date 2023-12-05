@@ -85,7 +85,7 @@ class _BasketState extends State<Basket> {
                             ),
                           );
                       },),
-
+                    // Total Price
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -100,11 +100,10 @@ class _BasketState extends State<Basket> {
                               children: [
                                 Text("Subtotal",style: TextStyle(color: ColorConstants.white,fontFamily: 'SansPro',fontSize: 14),),
                                 Text("₺${total.toString()}",style: TextStyle(fontFamily: 'SansPro',color: ColorConstants.white,fontSize: 16),),
-
                               ],
                             ),
                           ),
-
+                          // TextButton
                           Padding(
                             padding: const EdgeInsets.only(right: 32,left: 32,bottom: 16),
                             child: SizedBox(

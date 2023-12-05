@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:order_app/components/riverpood/google_nav_bar.dart';
 import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/ui/views/basket.dart';
-import 'package:order_app/ui/views/home.dart';
-import 'package:order_app/ui/views/profile.dart';
+
+import 'package:order_app/ui/views/navigation_items/basket.dart';
+import 'package:order_app/ui/views/navigation_items/favourite.dart';
+import 'package:order_app/ui/views/navigation_items/home.dart';
+import 'package:order_app/ui/views/navigation_items/profile.dart';
 
 
 class BottomNavBar extends StatefulWidget {
@@ -22,7 +24,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     });
   }
 
-  final List<Widget> pages = [const Home(), const Basket(), const Profile()];
+  final List<Widget> pages = [const Home(), const Basket(),const Favourite(), const Profile()];
 
   @override
   Widget build(BuildContext context) {
