@@ -9,21 +9,25 @@ import 'package:order_app/data/entity/basket_model.dart';
 import 'package:order_app/data/entity/basket_response.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/data/entity/product_response.dart';
+import 'package:order_app/ui/views/login.dart';
 import 'package:order_app/ui/views/onboard/onboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderDaoRepository{
-
+  // Product Response
   List<ProductModel> parseProductResponse(String response){
     return ProductResponse.fromJson(json.decode(response)).products;
   }
+  // Basket Response
   List<BasketModel> parseBasketModel(String response){
     return BasketResponse.fromJson(json.decode(response)).basket_products;
   }
+  // User process
   var collectionUser = FirebaseFirestore.instance.collection("Users");
   var auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
 
-
+  // Home Process
   Future<List<ProductModel>> getProduct() async {
     var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
     var response = await Dio().get(url);
@@ -40,17 +44,19 @@ class OrderDaoRepository{
     var response = await Dio().post(url,data: FormData.fromMap(data));
     print("Add products: ${response.data.toString()}");
   }
-  Future<List<BasketModel>> getBasket() async{
-    var url = "http://kasimadalan.pe.hu/yemekler/sepettekiYemekleriGetir.php";
-    var data = {"kullanici_adi":"hakan_baysal"};
-    var response = await Dio().post(url,data: FormData.fromMap(data));
-    return parseBasketModel(response.data.toString());
-  }
+
+  // Basket Process
   Future<void> deleteProduct(int yemek_sepet_id,String user_name) async{
     var url = "http://kasimadalan.pe.hu/yemekler/sepettenYemekSil.php";
     var data = {"sepet_yemek_id":yemek_sepet_id,"kullanici_adi":user_name};
     var response = await Dio().post(url,data: FormData.fromMap(data));
     print("Delete product: ${response.data.toString()}");
+  }
+  Future<List<BasketModel>> getBasket() async{
+    var url = "http://kasimadalan.pe.hu/yemekler/sepettekiYemekleriGetir.php";
+    var data = {"kullanici_adi":"hakan_baysal"};
+    var response = await Dio().post(url,data: FormData.fromMap(data));
+    return parseBasketModel(response.data.toString());
   }
   Future<void> login(String email,String password,BuildContext context) async{
     try{
@@ -102,10 +108,11 @@ class OrderDaoRepository{
     newAdress["adress_directions"] = adress_directions;
     collectionAdress.add(newAdress);
   }
+
+  // Onboard Cubit
   Future<void> changeIndicator(int value,TabController tabController) async{
     tabController.animateTo(value);
   }
-
 
  // Product Details Cubit
   Future<int> increase(int number) async{
@@ -116,12 +123,24 @@ class OrderDaoRepository{
     var total = number - 1;
     return total;
   }
-  Future<void> checkUserLoginStatus(BuildContext context) async{
+
+  // Splash management
+  Future<void> checkUserStatus(BuildContext context) async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool seen = (preferences.getBool('seen') ?? false);
     var user = auth.currentUser;
-    if(user != null){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+    if(seen){
+      if(user != null){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+      }else{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Login(),));
+      }
     }else{
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Onboard(),));
+      await preferences.setBool('seen', true);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Onboard(),));
+
     }
   }
+
+
 }

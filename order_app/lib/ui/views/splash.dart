@@ -59,7 +59,7 @@ class _SplashState extends State<Splash> {
       duration: Duration(seconds: 3),
       child: LottieCustomWidget("$animateJson"),
       onEnd:() {
-        context.read<SplashCubit>().checkUserLoginStatus(context);
+        context.read<SplashCubit>().checkUserStatus(context);
       },
     );
   }

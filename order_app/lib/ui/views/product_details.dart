@@ -27,7 +27,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Container(
             decoration: const BoxDecoration(
               boxShadow: [
-                BoxShadow(color: Colors.black12,blurRadius: 1,offset: Offset(1, 2)),
+                BoxShadow(color: ColorConstants.blackLight,blurRadius: 1,offset: Offset(1, 2)),
               ],
               color: ColorConstants.white,
               borderRadius: BorderRadius.only(
@@ -45,7 +45,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       IconButton(onPressed: () {
                         Navigator.pop(context);
                       }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
-                      Icon(Icons.favorite,color: Colors.grey),
+                      Icon(Icons.favorite,color: ColorConstants.grey),
                     ],
                   ),
                 ),
@@ -59,7 +59,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.product.product_name,style: const TextStyle(fontFamily: 'SansPro',fontSize: 24,color: Colors.grey),),
+                Text(widget.product.product_name,style: const TextStyle(fontFamily: 'SansPro',fontSize: 24,color: ColorConstants.grey),),
                 SizedBox(
                   child: BlocBuilder<ProductDetailsCubit,int>(
                     builder: (context,state) {
@@ -70,7 +70,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             context.read<ProductDetailsCubit>().decrease(state);
 
                           });
-                        }, icon: const Icon(CupertinoIcons.minus_square_fill,color: Colors.grey,)),
+                        }, icon: const Icon(CupertinoIcons.minus_square_fill,color: ColorConstants.grey,)),
                         Container(
                           width: 50,
                           color: const Color(0xFFC4C4C4).withOpacity(0.6),
@@ -98,15 +98,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Container(
                   width: 54,
                   height: 45,
-                  decoration: BoxDecoration(border: Border.all(color: Colors.black12,width: 2),borderRadius: const BorderRadius.all(Radius.circular(8))),
+                  decoration: BoxDecoration(border: Border.all(color: ColorConstants.blackLight,width: 2),borderRadius: const BorderRadius.all(Radius.circular(8))),
                   child: const Icon(Icons.location_on,color: ColorConstants.priceColor,),
                 ),
                 const SizedBox(width: 10,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Location",style: TextStyle(fontFamily: 'SansPro',fontSize: 18,color: Colors.black.withOpacity(0.7))),
-                    Text("Charbhuja Chawk , Makrana",style: TextStyle(fontFamily: 'SansPro',fontSize: 14,color: Colors.black.withOpacity(0.6)),),
+                    Text("Location",style: TextStyle(fontFamily: 'SansPro',fontSize: 18,color: ColorConstants.black.withOpacity(0.7))),
+                    Text("Charbhuja Chawk , Makrana",style: TextStyle(fontFamily: 'SansPro',fontSize: 14,color: ColorConstants.black.withOpacity(0.6)),),
                   ],
                 ),
               ],
@@ -119,15 +119,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Container(
                   width: 54,
                   height: 45,
-                  decoration: BoxDecoration(border: Border.all(color: Colors.black12,width: 2),borderRadius: const BorderRadius.all(Radius.circular(8))),
+                  decoration: BoxDecoration(border: Border.all(color: ColorConstants.blackLight,width: 2),borderRadius: const BorderRadius.all(Radius.circular(8))),
                   child: const Icon(Icons.watch_later,color: ColorConstants.priceColor,),
                 ),
                 const SizedBox(width: 10,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Delivery Time",style: TextStyle(fontFamily: 'SansPro',fontSize: 18,color: Colors.black.withOpacity(0.7))),
-                    Text("30 Times",style: TextStyle(fontFamily: 'SansPro',fontSize: 14,color: Colors.black.withOpacity(0.6)),),
+                    Text("Delivery Time",style: TextStyle(fontFamily: 'SansPro',fontSize: 18,color: ColorConstants.black.withOpacity(0.7))),
+                    Text("30 Times",style: TextStyle(fontFamily: 'SansPro',fontSize: 14,color: ColorConstants.black.withOpacity(0.6)),),
                   ],
                 ),
               ],
@@ -154,12 +154,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("$number items",style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500,fontFamily: 'SansPro')),
-                              Text("₺ $total",style: TextStyle(color: Colors.white,fontSize: 24,fontFamily: 'SansPro',fontWeight: FontWeight.w500)),
+                              Text("$number items",style: TextStyle(color: ColorConstants.white,fontSize: 16,fontWeight: FontWeight.w500,fontFamily: 'SansPro')),
+                              Text("₺ $total",style: TextStyle(color: ColorConstants.white,fontSize: 24,fontFamily: 'SansPro',fontWeight: FontWeight.w500)),
 
                                   ],
                                 ),
-                            const Text("Add to Card",style: TextStyle(color: Colors.white,fontFamily: 'SansPro',fontWeight: FontWeight.w500,fontSize: 16)),
+                            const Text("Add to Card",style: TextStyle(color: ColorConstants.white,fontFamily: 'SansPro',fontWeight: FontWeight.w500,fontSize: 16)),
                           ],
                         ),
                       ),
