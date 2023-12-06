@@ -166,5 +166,9 @@ class OrderDaoRepository{
       favouriteProduct["product_image_url"] = "http://kasimadalan.pe.hu/yemekler/resimler/$product_image_name";
       collectionFavourites.add(favouriteProduct);
   }
-//      collectionFavourites.doc(querySnapshot.docs[0].id).delete();
+  Future<void> deleteFavourite(String product_id) async{
+    final collectionFavourites = firestore.collection("Favourites");
+    QuerySnapshot snapshot = await collectionFavourites.where("product_id",isEqualTo: product_id).get();
+    collectionFavourites.doc(snapshot.docs[0].id).delete();
+  }
 }

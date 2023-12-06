@@ -9,6 +9,7 @@ import 'package:order_app/ui/bloc/onboard_cubit.dart';
 import 'package:order_app/ui/bloc/product_details_cubit.dart';
 import 'package:order_app/ui/bloc/registration_cubit.dart';
 import 'package:order_app/ui/bloc/splash_cubit.dart';
+import 'package:order_app/ui/views/onboard/onboard.dart';
 
 import 'package:order_app/ui/views/splash.dart';
 
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const Splash(),
+        home: const Onboard()//Splash(),
       ),
     );
   }

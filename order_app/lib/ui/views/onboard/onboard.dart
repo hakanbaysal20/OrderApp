@@ -20,47 +20,54 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
     super.initState();
     tabController = TabController(length: OnboardList.onboardItems.length, vsync: this);
   }
-// Visibility yarım kaldı çalışmıyor. control değişkeni kontrol et.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(gradient: LinearGradient(colors: ColorConstants.linearColor)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-           SizedBox(
-             width: double.infinity,
-             height: 420,
-             child: PageView.builder(
-               onPageChanged: (value) {
-                 setState(() {
-                 });
-                 context.read<OnboardCubit>().changeIndicator(value, tabController);
-               },
-               itemCount: OnboardList.onboardItems.length,
-               itemBuilder: (context, index) {
-                 return OnboardCard(OnboardList.onboardItems[index],
-                    );
-                 },),
-           ),
-            TabPageSelector(
-               selectedColor: ColorConstants.white,
-               indicatorSize: 10,
-               color: Colors.black54,
-               controller: tabController,
-             ),
-            const SizedBox(height: 80),
-           TextButton(onPressed: () {
-             Navigator.push(context, MaterialPageRoute(builder: (context) => const Login(),));
-              },style: TextButton.styleFrom(backgroundColor: ColorConstants.white,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(37))),
-                  child: const SizedBox(width: 150,child: Text("Get a meal",style: TextStyle(color: ColorConstants.buttonTextColor,fontFamily: 'Roboto',fontSize: 16),textAlign: TextAlign.center))),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(height: 100,),
+         SizedBox(
+           width: double.infinity,
+           height: 420,
+           child: PageView.builder(
+             onPageChanged: (value) {
+               setState(() {
+               });
+               context.read<OnboardCubit>().changeIndicator(value, tabController);
+             },
+             itemCount: OnboardList.onboardItems.length,
+             itemBuilder: (context, index) {
+               return OnboardCard(OnboardList.onboardItems[index],
+                  );
+               },),
+         ),
+          Spacer(),
 
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(onPressed: () {
 
-          ],
-        ),
+                }, child: Text("Skip",style: TextStyle(color: ColorConstants.black,fontSize: 16),)),
+                TabPageSelector(
+                  selectedColor: ColorConstants.priceColor,
+                  borderStyle: BorderStyle.none,
+                  indicatorSize: 10,
+                  color: Colors.black12,
+                  controller: tabController,
+                ),
+                IconButton(onPressed: () {
+
+                }, icon: Icon(Icons.arrow_forward_ios,color: ColorConstants.priceColor,))
+              ],
+            ),
+          ),
+
+        ],
       ),
     );
   }

@@ -62,8 +62,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                             setState(() {
                             if(checkFavourite == false){
                               context.read<ProductDetailsCubit>().saveFavourite(widget.product.product_name, widget.product.product_image, widget.product.product_id);
-
+                              Navigator.pop(context);
                             }else{
+                              context.read<ProductDetailsCubit>().deleteFavourite(widget.product.product_id);
+                              Navigator.pop(context);
                             }
                             });
                           }, icon:Icon(Icons.favorite),color: checkFavourite ? ColorConstants.priceColor :  ColorConstants.grey),
