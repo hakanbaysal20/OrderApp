@@ -18,14 +18,14 @@ class CustomTextField extends StatelessWidget {
         child: TextField(
           controller: controller,
           obscureText: obscureText,
-          style: TextStyle(color: Colors.white,fontFamily: 'Roboto',fontWeight: FontWeight.w500,fontSize: 18),
+          style: TextStyle(color: Colors.black54,fontFamily: 'Roboto',fontWeight: FontWeight.w500,fontSize: 18),
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 15),
             prefixIcon: icon,
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.white,fontSize: 18,fontFamily: 'Roboto'),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white,width: 2),borderRadius: BorderRadius.circular(37)),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(37)),
+            hintStyle: TextStyle(color: Colors.black12,fontSize: 18,fontFamily: 'Roboto'),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26),borderRadius: BorderRadius.circular(7)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(7)),
           ),
         ),
       ),

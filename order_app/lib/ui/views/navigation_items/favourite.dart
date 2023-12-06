@@ -43,7 +43,7 @@ class _FavouriteState extends State<Favourite> {
                        ],
                      ),
                     Image.network(product.product_image_url),
-                    Text("Baklava"),
+                    Text(product.product_name),
                   ],
                 ),
               ),

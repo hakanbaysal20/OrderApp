@@ -24,9 +24,25 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(height: 100,),
+          Padding(
+            padding: const EdgeInsets.only(top: 32.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login(),));
+                }, child: Row(
+                  children: [
+                    Text("Login",style: TextStyle(color: ColorConstants.priceColor),),
+                    Icon(Icons.arrow_forward_ios,color: ColorConstants.priceColor,),
+                  ],
+                )),
+              ],
+            ),
+          ),
          SizedBox(
            width: double.infinity,
            height: 420,
@@ -42,28 +58,15 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
                   );
                },),
          ),
-          Spacer(),
 
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(onPressed: () {
-
-                }, child: Text("Skip",style: TextStyle(color: ColorConstants.black,fontSize: 16),)),
-                TabPageSelector(
-                  selectedColor: ColorConstants.priceColor,
-                  borderStyle: BorderStyle.none,
-                  indicatorSize: 10,
-                  color: Colors.black12,
-                  controller: tabController,
-                ),
-                IconButton(onPressed: () {
-
-                }, icon: Icon(Icons.arrow_forward_ios,color: ColorConstants.priceColor,))
-              ],
+            child: TabPageSelector(
+              selectedColor: ColorConstants.priceColor,
+              borderStyle: BorderStyle.none,
+              indicatorSize: 10,
+              color: Colors.black12,
+              controller: tabController,
             ),
           ),
 
