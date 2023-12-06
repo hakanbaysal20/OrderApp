@@ -16,9 +16,13 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  bool favouriteControl = false;
   @override
   void initState() {
     super.initState();
+    context.read<ProductDetailsCubit>().decrease(0);
+    context.read<ProductDetailsCubit>().increase(0);
+    context.read<ProductDetailsCubit>().checkFavourite(widget.product.product_id);
   }
 
   @override
@@ -55,8 +59,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                             Navigator.pop(context);
                           }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
                           IconButton(onPressed: () {
-                            context.read<ProductDetailsCubit>().saveFavourite(widget.product.product_name, widget.product.product_image, widget.product.product_id,checkFavourite);
+                            setState(() {
+                            if(checkFavourite == false){
+                              context.read<ProductDetailsCubit>().saveFavourite(widget.product.product_name, widget.product.product_image, widget.product.product_id);
 
+                            }else{
+                            }
+                            });
                           }, icon:Icon(Icons.favorite),color: checkFavourite ? ColorConstants.priceColor :  ColorConstants.grey),
                         ],
                       );
@@ -78,13 +87,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: BlocBuilder<ProductDetailsCubit,ListType>(
                     builder: (context,state) {
                       var value = state.productAmount;
+
                       return Row(
                       children: [
                         IconButton(onPressed: () {
-                          setState(() {
+
                             context.read<ProductDetailsCubit>().decrease(value);
 
-                          });
                         }, icon: const Icon(CupertinoIcons.minus_square_fill,color: ColorConstants.grey,)),
                         Container(
                           width: 50,
@@ -92,10 +101,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                           child: Text(value.toString(),textAlign: TextAlign.center,style: const TextStyle(fontFamily: 'SansPro',color: Colors.grey)),
                         ),
                         IconButton(onPressed: () {
-                          setState(() {
                             context.read<ProductDetailsCubit>().increase(value);
 
-                          });
                         }, icon: const Icon(CupertinoIcons.plus_square_fill,color: Colors.red,)),
                        ],
                       );
@@ -153,12 +160,14 @@ class _ProductDetailsState extends State<ProductDetails> {
             child: BlocBuilder<ProductDetailsCubit,ListType>(
               builder: (context,number) {
                 var num = number.productAmount;
+
                 var total = int.parse(widget.product.product_price) * num;
                 var product= widget.product;
                 return GestureDetector(
                   onTap: () {
                     context.read<ProductDetailsCubit>().addToBasket(product.product_name, product.product_image, product.product_price, num.toString(), "hakan_baysal");
                     Navigator.pop(context);
+                    num = 1;
                   },
                   child: Container(
                     width: double.infinity,

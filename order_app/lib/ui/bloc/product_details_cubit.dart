@@ -4,7 +4,7 @@ import 'package:order_app/data/entity/list_type.dart';
 import 'package:order_app/data/repo/order_dao_repository.dart';
 
 class ProductDetailsCubit extends Cubit<ListType>{
-  ProductDetailsCubit():super(ListType(checkFavourite: false, productAmount: 0));
+  ProductDetailsCubit():super(ListType(checkFavourite: false, productAmount: 1));
 
   var kRepo = OrderDaoRepository();
   Future<void> increase(int number) async{
@@ -18,10 +18,15 @@ class ProductDetailsCubit extends Cubit<ListType>{
 
   Future<void> addToBasket(String product_name,String product_image_name,String product_price, String product_order_amount,String user_name) async{
     await kRepo.addToBasket(product_name, product_image_name, product_price, product_order_amount, user_name);
+
   }
-  Future<void> saveFavourite(String product_name , String product_image_name,String product_id,bool statusFavourite) async{
-    var value = await kRepo.saveFavourite(product_name, product_image_name, product_id,statusFavourite);
+  Future<void> checkFavourite(String product_id) async{
+    var value = await kRepo.checkFavourite(product_id);
     emit(state.copyWith(checkFavourite: value));
   }
+  Future<void> saveFavourite(String product_name, String product_image_name,String product_id) async{
+    await kRepo.saveFavourite(product_name, product_image_name, product_id);
+  }
+
 
 }
