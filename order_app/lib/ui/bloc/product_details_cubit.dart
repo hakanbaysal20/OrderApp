@@ -16,8 +16,8 @@ class ProductDetailsCubit extends Cubit<ListType>{
     emit(state.copyWith(productAmount: value));
   }
 
-  Future<void> addToBasket(String product_name,String product_image_name,String product_price, String product_order_amount,String user_name) async{
-    await kRepo.addToBasket(product_name, product_image_name, product_price, product_order_amount, user_name);
+  Future<void> addToBasket(String product_name,String product_image_name,String product_price, String product_order_amount) async{
+    await kRepo.addToBasket(product_name, product_image_name, product_price, product_order_amount);
   }
   Future<void> checkFavourite(String product_id) async{
     var value = await kRepo.checkFavourite(product_id);

@@ -1,0 +1,5 @@
+
+enum MenuValues{
+  sortByPrice,
+  sortByWord,
+}

@@ -19,6 +19,13 @@ class _FavouriteState extends State<Favourite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text(
+          "Favoriler",
+          style: TextStyle(fontSize: 26, fontFamily: 'SansPro', fontWeight: FontWeight.w500),
+        ),
+      ),
       body: BlocBuilder<FavouriteCubit,List<FavouriteModel>>(
         builder: (context, state) {
         return GridView.builder(
@@ -30,21 +37,30 @@ class _FavouriteState extends State<Favourite> {
             var product = state[index];
             return Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(12)),border: Border.all(color: ColorConstants.blackLight)),
-                child: Column(
-                  children: [
-                     Row(
-                       mainAxisAlignment: MainAxisAlignment.end,
-                       children: [
-                         IconButton(onPressed: () {
-
-                         }, icon: Icon(Icons.favorite_outlined,color: ColorConstants.priceColor,))
-                       ],
-                     ),
-                    Image.network(product.product_image_url),
-                    Text(product.product_name),
+              child: Card(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [  BoxShadow(
+                      color: Colors.black.withOpacity(0.05), blurRadius: 1),
                   ],
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      ),
+                  child: Column(
+                    children: [
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.end,
+                         children: [
+                           IconButton(onPressed: () {
+                             context.read<FavouriteCubit>().deleteFavorite(product.product_id);
+
+                           }, icon: Icon(Icons.close_outlined ,color: Colors.black45,size: 25,))
+                         ],
+                       ),
+                      Image.network(product.product_image_url),
+                      Text(product.product_name),
+                    ],
+                  ),
                 ),
               ),
             );

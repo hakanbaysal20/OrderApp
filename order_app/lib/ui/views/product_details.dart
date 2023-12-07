@@ -16,7 +16,6 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  bool favouriteControl = false;
   @override
   void initState() {
     super.initState();
@@ -47,17 +46,16 @@ class _ProductDetailsState extends State<ProductDetails> {
             child: Column(
               children: [
                  Padding(
-                  padding: EdgeInsets.only(left: 20,right: 20,top: 20),
+                  padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
                   child: BlocBuilder<ProductDetailsCubit,ListType>(
                     builder: (context,state) {
                       var checkFavourite = state.checkFavourite;
-                      print(checkFavourite);
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(onPressed: () {
                             Navigator.pop(context);
-                          }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
+                          }, icon: const Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
                           IconButton(onPressed: () {
                             setState(() {
                             if(checkFavourite == false){
@@ -68,7 +66,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               Navigator.pop(context);
                             }
                             });
-                          }, icon:Icon(Icons.favorite),color: checkFavourite ? ColorConstants.priceColor :  ColorConstants.grey),
+                          }, icon:const Icon(Icons.favorite),color: checkFavourite ? ColorConstants.priceColor :  ColorConstants.grey),
                         ],
                       );
                     }
@@ -96,12 +94,8 @@ class _ProductDetailsState extends State<ProductDetails> {
 
                             context.read<ProductDetailsCubit>().decrease(value);
 
-                        }, icon: const Icon(CupertinoIcons.minus_square_fill,color: ColorConstants.grey,)),
-                        Container(
-                          width: 50,
-                          color: const Color(0xFFC4C4C4).withOpacity(0.6),
-                          child: Text(value.toString(),textAlign: TextAlign.center,style: const TextStyle(fontFamily: 'SansPro',color: Colors.grey)),
-                        ),
+                        }, icon:  Icon(CupertinoIcons.minus_square_fill,color: const Color(0xFFF43F5E).withOpacity(0.4),)),
+                        Text(value.toString(),textAlign: TextAlign.center,style: const TextStyle(fontFamily: 'SansPro',color: Colors.grey)),
                         IconButton(onPressed: () {
                             context.read<ProductDetailsCubit>().increase(value);
 
@@ -167,13 +161,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                 var product= widget.product;
                 return GestureDetector(
                   onTap: () {
-                    context.read<ProductDetailsCubit>().addToBasket(product.product_name, product.product_image, product.product_price, num.toString(), "hakan_baysal");
+                    context.read<ProductDetailsCubit>().addToBasket(product.product_name, product.product_image, product.product_price, num.toString());
                     Navigator.pop(context);
                     num = 1;
                   },
                   child: Container(
                     width: double.infinity,
-                    decoration: BoxDecoration(color: ColorConstants.priceColor,borderRadius: BorderRadius.only(bottomLeft: Radius.circular(37),bottomRight: Radius.circular(37))),
+                    decoration: const BoxDecoration(color: ColorConstants.priceColor,borderRadius: BorderRadius.only(bottomLeft: Radius.circular(37),bottomRight: Radius.circular(37))),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 16,left: 16),
                       child: Column(
@@ -181,8 +175,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("$num items",style: TextStyle(color: ColorConstants.white,fontSize: 16,fontWeight: FontWeight.w500,fontFamily: 'SansPro')),
-                              Text("₺ $total",style: TextStyle(color: ColorConstants.white,fontSize: 24,fontFamily: 'SansPro',fontWeight: FontWeight.w500)),
+                              Text("$num items",style: const TextStyle(color: ColorConstants.white,fontSize: 16,fontWeight: FontWeight.w500,fontFamily: 'SansPro')),
+                              Text("₺ $total",style: const TextStyle(color: ColorConstants.white,fontSize: 24,fontFamily: 'SansPro',fontWeight: FontWeight.w500)),
 
                                   ],
                                 ),

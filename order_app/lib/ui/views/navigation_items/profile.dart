@@ -13,7 +13,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(image: AssetImage(ImageConstants.backgroundImage.toPng),alignment: Alignment.topRight),
@@ -23,7 +22,6 @@ class _ProfileState extends State<Profile> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-
               padding: const EdgeInsets.only(right: 16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

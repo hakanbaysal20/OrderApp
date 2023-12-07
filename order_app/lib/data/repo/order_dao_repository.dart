@@ -33,14 +33,15 @@ class OrderDaoRepository{
     var response = await Dio().get(url);
     return parseProductResponse(response.data.toString());
   }
-  Future<void> addToBasket(String product_name,String product_image_name,String product_price,String product_order_amount,String user_name) async{
+  Future<void> addToBasket(String product_name,String product_image_name,String product_price,String product_order_amount) async{
     var url ="http://kasimadalan.pe.hu/yemekler/sepeteYemekEkle.php";
+    var user_id = FirebaseAuth.instance.currentUser!.uid;
     var data = {
       "yemek_adi":product_name,
       "yemek_resim_adi":product_image_name,
       "yemek_fiyat":int.parse(product_price),
       "yemek_siparis_adet":int.parse(product_order_amount),
-      "kullanici_adi":user_name};
+      "kullanici_adi":user_id};
     var response = await Dio().post(url,data: FormData.fromMap(data));
     print("Add products: ${response.data.toString()}");
   }
@@ -53,8 +54,9 @@ class OrderDaoRepository{
     print("Delete product: ${response.data.toString()}");
   }
   Future<List<BasketModel>> getBasket() async{
+    var userId = FirebaseAuth.instance.currentUser!.uid;
     var url = "http://kasimadalan.pe.hu/yemekler/sepettekiYemekleriGetir.php";
-    var data = {"kullanici_adi":"hakan_baysal"};
+    var data = {"kullanici_adi": userId};
     var response = await Dio().post(url,data: FormData.fromMap(data));
     return parseBasketModel(response.data.toString());
   }
@@ -137,7 +139,7 @@ class OrderDaoRepository{
       if(user != null){
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
       }else{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Login(),));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(),));
       }
     }else{
       await preferences.setBool('seen', true);

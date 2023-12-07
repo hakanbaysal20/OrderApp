@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
 import 'package:order_app/data/entity/product_model.dart';
+import 'package:order_app/enums/menu_values.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
 import 'package:order_app/ui/views/product_details.dart';
 
@@ -26,7 +27,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          "Food & Drinks",
+          "Menu",
           style: TextStyle(fontSize: 26, fontFamily: 'SansPro', fontWeight: FontWeight.w500),
         ),
       ),
@@ -62,14 +63,27 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF43F5E).withOpacity(0.1),
-                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                PopupMenuButton<MenuValues>(
+                  itemBuilder: (context) => [
+                    PopupMenuItem(child: Text("Fiyata göre sırala"),value: MenuValues.sortByPrice,),
+                    PopupMenuItem(child: Text("İsme göre sırala"),value: MenuValues.sortByWord,),
+                  ],
+                  onSelected: (value) {
+                    if(value == MenuValues.sortByPrice){
+
+                    }else if(value == MenuValues.sortByWord){
+
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF43F5E).withOpacity(0.1),
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    ),
+                    width: 50,
+                    height: 50,
+                    child: const Icon(Icons.filter_list_outlined, color: Color(0xFFF43F5E)),
                   ),
-                  width: 50,
-                  height: 50,
-                  child: const Icon(Icons.filter_list_outlined, color: Color(0xFFF43F5E)),
                 ),
               ],
             ),
@@ -93,11 +107,11 @@ class _HomeState extends State<Home> {
                             child: Card(
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                                  borderRadius: const BorderRadius.all(Radius.circular(12)),
                                   color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.black.withOpacity(0.05), blurRadius: 1),
+                                        color: Colors.blue.withOpacity(0.08), blurRadius: 100,),
                                   ],
                                 ),
                                 child:  Padding(

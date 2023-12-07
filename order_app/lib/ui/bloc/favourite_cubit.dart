@@ -27,7 +27,8 @@ class FavouriteCubit extends Cubit<List<FavouriteModel>>{
       emit(list);
     });
   }
-
+  Future<void> deleteFavorite(String product_id) async{
+    await kRepo.deleteFavourite(product_id);
+    favouriteList();
+  }
 }
-
-/// liste şeklinde product details cubit hazır bro gelince bool değeri döndür

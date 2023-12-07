@@ -24,7 +24,6 @@ class _SplashState extends State<Splash> {
         imageOpacity = 1;
       });
     });
-
   }
   @override
   Widget build(BuildContext context) {
@@ -38,8 +37,8 @@ class _SplashState extends State<Splash> {
           children: [
             buildAnimatedOpacityLottie("splash_anim"),
 
-            Text("Hello",style: TextStyle(fontFamily: 'Roboto',fontSize: 20,fontWeight: FontWeight.w500,color: ColorConstants.white),),
-            Spacer(),
+            const Text("Hello",style: TextStyle(fontFamily: 'Roboto',fontSize: 20,fontWeight: FontWeight.w500,color: ColorConstants.white),),
+            const Spacer(),
             Visibility(
               visible: imageOpacity == 1,
               child: SizedBox(
@@ -56,7 +55,7 @@ class _SplashState extends State<Splash> {
   Widget buildAnimatedOpacityLottie(String animateJson){
     return AnimatedOpacity(
       opacity: imageOpacity,
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
       child: LottieCustomWidget("$animateJson"),
       onEnd:() {
         context.read<SplashCubit>().checkUserStatus(context);
