@@ -50,6 +50,15 @@ class OrderDaoRepository{
     return productList;
   }
 
+  Future<List<ProductModel>> getSearch(String searchedWord) async {
+    var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
+    var response = await Dio().get(url);
+    var productList =  parseProductResponse(response.data.toString());
+    Iterable<ProductModel> search = productList.where((item) => item.product_name.toLowerCase().contains(searchedWord.toLowerCase()));
+
+    var list = search.toList();
+    return list;
+  }
   Future<List<ProductModel>> filterProduct(int max, int min) async {
     var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
     var response = await Dio().get(url);
@@ -131,14 +140,7 @@ class OrderDaoRepository{
         print(e);
       }
   }
-  Future<List<ProductModel>> search() async{
-    final dio = Dio();
-    var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
-    var response = await dio.get(url,queryParameters: {'yemek_id':5});
-    print(response.data.toString());
-    return parseProductResponse(response.data.toString());
 
-  }
   Future<void> saveAdress(String adress_name, String adress_city,String adress_district,String adress_directions) async{
     var userId = FirebaseAuth.instance.currentUser!.uid;
     final collectionAdress = firestore.collection("Users").doc(userId).collection("Address");

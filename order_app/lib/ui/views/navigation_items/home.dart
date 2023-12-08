@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
 import 'package:order_app/data/entity/product_model.dart';
-import 'package:order_app/enums/menu_values.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
 import 'package:order_app/ui/views/product_details.dart';
 import 'package:order_app/ui/views/widgets/filter_slide.dart';
@@ -13,12 +12,12 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
-
 class _HomeState extends State<Home> {
   var check = false;
-  var tf = TextEditingController();
   var minValue = 0.0;
   var maxValue = 150.0;
+  var isThereSearch = false;
+  var tf = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -47,13 +46,26 @@ class _HomeState extends State<Home> {
                   child: TextField(
                     controller: tf,
                     onChanged: (value) {
-                      context.read<HomeCubit>().search();
+                      setState(() {
+                        isThereSearch = value.isNotEmpty;
+                      });
+                      context.read<HomeCubit>().getSearch(value);
                     },
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xFFF4F6F9),
                       contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                      suffixIcon: const Icon(Icons.search),
+                      suffixIcon: isThereSearch ? GestureDetector(onTap: () {
+                        setState(() {
+                          tf.clear();
+                          isThereSearch = false;
+                        });
+                        FocusScope.of(context).unfocus();
+                        context.read<HomeCubit>().loadProducts();
+                      },child: const Icon(Icons.close)) : GestureDetector(onTap: () {
+                        
+                      }, child: const Icon(Icons.search),),
+
                       hintText: "Search",
                       hintStyle: const TextStyle(color: Color(0xFF09101D), fontSize: 18, fontFamily: 'SansPro'),
                       enabledBorder: OutlineInputBorder(
@@ -76,7 +88,7 @@ class _HomeState extends State<Home> {
                         expand: false,
                         builder: (context, scrollController) => SingleChildScrollView(
                           controller: scrollController,
-                          child: FilterSlide(),
+                          child: const FilterSlide(),
                         ),
                       ),
                     );
