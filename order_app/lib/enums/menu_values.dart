@@ -1,5 +1,7 @@
 
 enum MenuValues{
-  sortByPrice,
+  sortDefault,
+  sortAscByPrice,
+  sortDescByPrice,
   sortByWord,
 }

@@ -33,6 +33,31 @@ class OrderDaoRepository{
     var response = await Dio().get(url);
     return parseProductResponse(response.data.toString());
   }
+  Future<List<ProductModel>> sortAscByPriceProduct() async {
+    var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
+    var response = await Dio().get(url);
+    var productList =  parseProductResponse(response.data.toString());
+    Comparator<ProductModel> sortByPrice = (a, b) => int.parse(a.product_price).compareTo(int.parse(b.product_price));
+    productList.sort(sortByPrice);
+    return productList;
+  }
+  Future<List<ProductModel>> sortDescByPriceProduct() async {
+    var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
+    var response = await Dio().get(url);
+    var productList =  parseProductResponse(response.data.toString());
+    Comparator<ProductModel> sortByPrice = (a, b) => int.parse(b.product_price).compareTo(int.parse(a.product_price));
+    productList.sort(sortByPrice);
+    return productList;
+  }
+  Future<List<ProductModel>> sortByWordProduct() async {
+    var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
+    var response = await Dio().get(url);
+    var productList =  parseProductResponse(response.data.toString());
+    Comparator<ProductModel> sortByWord = (a, b) => a.product_name.compareTo(b.product_name);
+    productList.sort(sortByWord);
+    return productList;
+  }
+
   Future<void> addToBasket(String product_name,String product_image_name,String product_price,String product_order_amount) async{
     var url ="http://kasimadalan.pe.hu/yemekler/sepeteYemekEkle.php";
     var user_id = FirebaseAuth.instance.currentUser!.uid;

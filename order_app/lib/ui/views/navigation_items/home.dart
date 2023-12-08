@@ -14,6 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var check = false;
   var tf = TextEditingController();
   @override
   void initState() {
@@ -65,15 +66,23 @@ class _HomeState extends State<Home> {
                 ),
                 PopupMenuButton<MenuValues>(
                   itemBuilder: (context) => [
-                    PopupMenuItem(child: Text("Fiyata göre sırala"),value: MenuValues.sortByPrice,),
-                    PopupMenuItem(child: Text("İsme göre sırala"),value: MenuValues.sortByWord,),
+                    const PopupMenuItem(child: Text("Normal"),value: MenuValues.sortDefault,),
+                    const PopupMenuItem(child: Text("Fiyata göre artan"),value: MenuValues.sortAscByPrice,),
+                    const PopupMenuItem(child: Text("Fiyata göre azalan"),value: MenuValues.sortDescByPrice,),
+                    const PopupMenuItem(child: Text("İsme göre sırala"),value: MenuValues.sortByWord,),
                   ],
                   onSelected: (value) {
-                    if(value == MenuValues.sortByPrice){
+                    setState(() {
+                      if(value == MenuValues.sortAscByPrice){
+                        context.read<HomeCubit>().sortAscByPriceProduct();
+                      }else if(value == MenuValues.sortDescByPrice){
+                        context.read<HomeCubit>().sortDescByPriceProduct();
+                      }else if(value == MenuValues.sortByWord){
+                        context.read<HomeCubit>().sortByWordProduct();
+                      }else if(value == MenuValues.sortDefault)
+                        context.read<HomeCubit>().loadProducts();
 
-                    }else if(value == MenuValues.sortByWord){
-
-                    }
+                    });
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -90,6 +99,7 @@ class _HomeState extends State<Home> {
             BlocBuilder<HomeCubit, List<ProductModel>>(
               builder: (context, productList) {
                 if (productList.isNotEmpty) {
+
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
