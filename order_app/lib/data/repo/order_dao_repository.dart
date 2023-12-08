@@ -49,6 +49,17 @@ class OrderDaoRepository{
     productList.sort(sortByPrice);
     return productList;
   }
+
+  Future<List<ProductModel>> filterProduct(int max, int min) async {
+    var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
+    var response = await Dio().get(url);
+    var productList =  parseProductResponse(response.data.toString());
+    Iterable<ProductModel> filter = productList.where((producObject) {
+      return int.parse(producObject.product_price) > min && int.parse(producObject.product_price) < max;
+    });
+    var list = filter.toList();
+    return list;
+  }
   Future<List<ProductModel>> sortByWordProduct() async {
     var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
     var response = await Dio().get(url);

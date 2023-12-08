@@ -5,6 +5,7 @@ import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/enums/menu_values.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
 import 'package:order_app/ui/views/product_details.dart';
+import 'package:order_app/ui/views/widgets/filter_slide.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,6 +17,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var check = false;
   var tf = TextEditingController();
+  var minValue = 0.0;
+  var maxValue = 150.0;
   @override
   void initState() {
     super.initState();
@@ -64,25 +67,19 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                PopupMenuButton<MenuValues>(
-                  itemBuilder: (context) => [
-                    const PopupMenuItem(child: Text("Normal"),value: MenuValues.sortDefault,),
-                    const PopupMenuItem(child: Text("Fiyata göre artan"),value: MenuValues.sortAscByPrice,),
-                    const PopupMenuItem(child: Text("Fiyata göre azalan"),value: MenuValues.sortDescByPrice,),
-                    const PopupMenuItem(child: Text("İsme göre sırala"),value: MenuValues.sortByWord,),
-                  ],
-                  onSelected: (value) {
-                    setState(() {
-                      if(value == MenuValues.sortAscByPrice){
-                        context.read<HomeCubit>().sortAscByPriceProduct();
-                      }else if(value == MenuValues.sortDescByPrice){
-                        context.read<HomeCubit>().sortDescByPriceProduct();
-                      }else if(value == MenuValues.sortByWord){
-                        context.read<HomeCubit>().sortByWordProduct();
-                      }else if(value == MenuValues.sortDefault)
-                        context.read<HomeCubit>().loadProducts();
-
-                    });
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => DraggableScrollableSheet(
+                        expand: false,
+                        builder: (context, scrollController) => SingleChildScrollView(
+                          controller: scrollController,
+                          child: FilterSlide(),
+                        ),
+                      ),
+                    );
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -96,6 +93,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
+
             BlocBuilder<HomeCubit, List<ProductModel>>(
               builder: (context, productList) {
                 if (productList.isNotEmpty) {
@@ -170,3 +168,4 @@ class _HomeState extends State<Home> {
     );
   }
 }
+

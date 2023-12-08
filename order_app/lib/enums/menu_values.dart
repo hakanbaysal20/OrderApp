@@ -4,4 +4,5 @@ enum MenuValues{
   sortAscByPrice,
   sortDescByPrice,
   sortByWord,
+  filterByPriceProduct,
 }

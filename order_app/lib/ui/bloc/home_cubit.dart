@@ -18,6 +18,10 @@ class HomeCubit extends Cubit<List<ProductModel>>{
     var list = await pRepo.sortDescByPriceProduct();
     emit(list);
   }
+  Future<void> filterProduct(int max , int min) async{
+    var list = await pRepo.filterProduct(max, min);
+    emit(list);
+  }
   Future<void> sortByWordProduct() async{
     var list = await pRepo.sortByWordProduct();
     emit(list);

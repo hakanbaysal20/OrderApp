@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
 import 'package:order_app/ui/bloc/login_cubit.dart';
-import 'package:order_app/ui/views/customTextField.dart';
+import 'package:order_app/ui/views/widgets/customTextField.dart';
 import 'package:order_app/ui/views/registration.dart';
 
 class Login extends StatefulWidget {
