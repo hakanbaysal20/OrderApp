@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().loadProducts();
+    context.read<HomeCubit>().getProducts();
   }
   @override
   Widget build(BuildContext context) {
@@ -61,9 +61,9 @@ class _HomeState extends State<Home> {
                           isThereSearch = false;
                         });
                         FocusScope.of(context).unfocus();
-                        context.read<HomeCubit>().loadProducts();
+                        context.read<HomeCubit>().getProducts();
                       },child: const Icon(Icons.close)) : GestureDetector(onTap: () {
-                        
+
                       }, child: const Icon(Icons.search),),
 
                       hintText: "Search",

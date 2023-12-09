@@ -60,9 +60,21 @@ class _ProductDetailsState extends State<ProductDetails> {
                             setState(() {
                             if(checkFavourite == false){
                               context.read<ProductDetailsCubit>().saveFavourite(widget.product.product_name, widget.product.product_image, widget.product.product_id);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: ColorConstants.white,
+                                  content:Text("${widget.product.product_name} favorilere eklendi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'SansPro',fontSize: 16),),
+                                ),
+                              );
                               Navigator.pop(context);
                             }else{
                               context.read<ProductDetailsCubit>().deleteFavourite(widget.product.product_id);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: ColorConstants.white,
+                                  content:Text("${widget.product.product_name} favorilerden silindi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'SansPro',fontSize: 16),),
+                                ),
+                              );
                               Navigator.pop(context);
                             }
                             });
@@ -162,6 +174,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                 return GestureDetector(
                   onTap: () {
                     context.read<ProductDetailsCubit>().addToBasket(product.product_name, product.product_image, product.product_price, num.toString());
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: ColorConstants.white,
+                          content:Text("${product.product_name} sepete eklendi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'SansPro',fontSize: 16),),
+                        ),
+                    );
                     Navigator.pop(context);
                     num = 1;
                   },

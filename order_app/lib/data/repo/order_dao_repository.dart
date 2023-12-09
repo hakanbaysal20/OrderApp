@@ -27,7 +27,7 @@ class OrderDaoRepository{
   var auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
 
-  // Home Process
+  // Home Functions
   Future<List<ProductModel>> getProduct() async {
     var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
     var response = await Dio().get(url);
@@ -49,7 +49,6 @@ class OrderDaoRepository{
     productList.sort(sortByPrice);
     return productList;
   }
-
   Future<List<ProductModel>> getSearch(String searchedWord) async {
     var url ="http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php";
     var response = await Dio().get(url);

@@ -30,8 +30,8 @@ class _FavouriteState extends State<Favourite> {
         builder: (context, state) {
         return GridView.builder(
           shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.7),
+          physics: const BouncingScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.7),
            itemCount: state.length,
            itemBuilder: (context, index) {
             var product = state[index];
@@ -54,7 +54,7 @@ class _FavouriteState extends State<Favourite> {
                            IconButton(onPressed: () {
                              context.read<FavouriteCubit>().deleteFavorite(product.product_id);
 
-                           }, icon: Icon(Icons.close_outlined ,color: Colors.black45,size: 25,))
+                           }, icon: const Icon(Icons.close_outlined ,color: Colors.black45,size: 25,))
                          ],
                        ),
                       Image.network(product.product_image_url),

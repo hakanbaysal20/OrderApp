@@ -7,6 +7,7 @@ import 'package:order_app/ui/bloc/home_cubit.dart';
 import 'package:order_app/ui/bloc/login_cubit.dart';
 import 'package:order_app/ui/bloc/onboard_cubit.dart';
 import 'package:order_app/ui/bloc/product_details_cubit.dart';
+import 'package:order_app/ui/bloc/profile_cubit.dart';
 import 'package:order_app/ui/bloc/registration_cubit.dart';
 import 'package:order_app/ui/bloc/splash_cubit.dart';
 import 'package:order_app/ui/views/onboard/onboard.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ProductDetailsCubit()),
         BlocProvider(create: (context) => SplashCubit()),
         BlocProvider(create: (context) => FavouriteCubit(),),
+        BlocProvider(create: (context) => ProfileCubit(),),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -6,7 +6,7 @@ class HomeCubit extends Cubit<List<ProductModel>>{
   HomeCubit():super(<ProductModel>[]);
 
   var pRepo = OrderDaoRepository();
-  Future<void> loadProducts() async {
+  Future<void> getProducts() async {
     var list = await pRepo.getProduct();
     emit(list);
   }
