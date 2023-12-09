@@ -91,9 +91,11 @@ class OrderDaoRepository{
   }
 
   // Basket Process
-  Future<void> deleteProduct(int yemek_sepet_id,String user_name) async{
+  Future<void> deleteProduct(int yemek_sepet_id) async{
+    var userId = FirebaseAuth.instance.currentUser!.uid;
+
     var url = "http://kasimadalan.pe.hu/yemekler/sepettenYemekSil.php";
-    var data = {"sepet_yemek_id":yemek_sepet_id,"kullanici_adi":user_name};
+    var data = {"sepet_yemek_id":yemek_sepet_id,"kullanici_adi":userId};
     var response = await Dio().post(url,data: FormData.fromMap(data));
     print("Delete product: ${response.data.toString()}");
   }

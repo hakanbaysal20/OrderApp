@@ -81,7 +81,7 @@ class _BasketState extends State<Basket> {
                                           const Spacer(),
 
                                           IconButton(onPressed: () {
-                                            context.read<BasketCubit>().deleteProduct(int.parse(product.basket_product_id),"hakan_baysal");
+                                            context.read<BasketCubit>().deleteProduct(int.parse(product.basket_product_id));
                                             total = total - (int.parse(product.product_price) * int.parse(product.product_order_amount));
 
                                           }, icon: const Icon(Icons.delete),color: ColorConstants.priceColor,)
