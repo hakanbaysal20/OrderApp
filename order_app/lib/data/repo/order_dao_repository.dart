@@ -106,10 +106,15 @@ class OrderDaoRepository{
     var response = await Dio().post(url,data: FormData.fromMap(data));
     return parseBasketModel(response.data.toString());
   }
-  Future<int> totalPrice(int product_amount, int product_price) async{
-    var total = product_amount * product_price;
+  Future<int> totalPrice() async{
+    var getProducts = await getBasket();
+    var total = 0;
+    for(BasketModel i in getProducts){
+      total += int.parse(i.product_price) * int.parse(i.product_order_amount);
+    }
     return total;
   }
+  // Login functions
   Future<void> login(String email,String password,BuildContext context) async{
     try{
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
@@ -118,13 +123,17 @@ class OrderDaoRepository{
       print("Error");
     }
   }
-  Future<void> registration(BuildContext context,String email,String password,String passwordAgain) async{
+  Future<void> registration(BuildContext context,String email,String password,String passwordAgain,String userCity,String userName) async{
       try{
         if(password == passwordAgain){
           UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
           var newUser = HashMap<String,dynamic>();
+          var userId = FirebaseAuth.instance.currentUser!.uid;
+          newUser["user_name"] = userName;
           newUser["user_email"] = email;
           newUser["user_password"] = password;
+          newUser["user_city"] = userCity;
+          newUser["user_id"] = userId;
           collectionUser.add(newUser);
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
         }else{
@@ -142,23 +151,10 @@ class OrderDaoRepository{
       }
   }
 
-  Future<void> saveAdress(String adress_name, String adress_city,String adress_district,String adress_directions) async{
-    var userId = FirebaseAuth.instance.currentUser!.uid;
-    final collectionAdress = firestore.collection("Users").doc(userId).collection("Address");
-    var newAdress = HashMap<String,dynamic>();
-    newAdress["adress_id"] = "";
-    newAdress["adress_name"] = adress_name;
-    newAdress["adress_city"] = adress_city;
-    newAdress["adress_district"] = adress_district;
-    newAdress["adress_directions"] = adress_directions;
-    collectionAdress.add(newAdress);
-  }
-
   // Onboard Cubit
   Future<void> changeIndicator(int value,TabController tabController) async{
     tabController.animateTo(value);
   }
-
  // Product Details Cubit
   Future<int> increase(int number) async{
     var total = number + 1;

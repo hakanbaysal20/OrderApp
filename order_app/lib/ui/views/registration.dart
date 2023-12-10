@@ -15,6 +15,8 @@ class _RegistrationState extends State<Registration> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var passwordAgainController = TextEditingController();
+  var userNameController = TextEditingController();
+  var userCityController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,12 +43,14 @@ class _RegistrationState extends State<Registration> {
               padding: EdgeInsets.only(bottom: 16.0),
               child: Text("Grab your favourite food",style: TextStyle(fontSize: 20,fontFamily: 'Roboto',color: ColorConstants.priceColor,fontWeight: FontWeight.w500),),
             ),
+            CustomTextField(obscureText: false, hintText: "Name", icon: const Icon(Icons.person_add,color: ColorConstants.priceColor,), controller: userNameController),
             CustomTextField(obscureText: false, hintText: "E-mail", icon: const Icon(Icons.mail_outline,color: ColorConstants.priceColor),controller: emailController,),
+            CustomTextField(obscureText: false, hintText: "City", icon: const Icon(Icons.location_on,color: ColorConstants.priceColor,), controller: userCityController),
             CustomTextField(obscureText: true, hintText: "Password", icon: const Icon(Icons.lock_outline,color: ColorConstants.priceColor),controller: passwordController),
             CustomTextField(obscureText: true, hintText: "Password Again", icon: const Icon(Icons.lock_outline,color: ColorConstants.priceColor),controller: passwordAgainController),
 
             TextButton(onPressed: () {
-              context.read<RegistrationCubit>().registration(context,emailController.text, passwordController.text, passwordAgainController.text);
+              context.read<RegistrationCubit>().registration(context,emailController.text, passwordController.text, passwordAgainController.text,userCityController.text,userNameController.text);
 
             },style: TextButton.styleFrom(backgroundColor: ColorConstants.priceColor,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
                 child: Container(width: 300,child: const Text("Sign up",style: TextStyle(color: ColorConstants.white,fontFamily: 'Roboto',fontSize: 16),textAlign: TextAlign.center))),

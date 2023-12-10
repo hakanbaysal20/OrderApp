@@ -7,7 +7,7 @@ class RegistrationCubit extends Cubit<void>{
 
   var kRepo = OrderDaoRepository();
 
-  Future<void> registration(BuildContext context,String email, String password, String passwordAgain) async{
-    await kRepo.registration(context,email, password, passwordAgain);
+  Future<void> registration(BuildContext context,String email, String password, String passwordAgain,String userCity,String userName) async{
+    await kRepo.registration(context,email, password, passwordAgain,userName,userCity);
   }
 }

@@ -8,7 +8,6 @@ class Profile extends StatefulWidget {
   @override
   State<Profile> createState() => _ProfileState();
 }
-
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
@@ -30,41 +29,40 @@ class _ProfileState extends State<Profile> {
                     decoration: BoxDecoration(color: const Color(0xFFFF0000).withOpacity(0.1),borderRadius: const BorderRadius.all(Radius.circular(12))),
                     child: IconButton(onPressed: () {
 
-                    }, icon: const Icon(Icons.notifications_none_outlined,color: ColorConstants.priceColor,)),
+                        }, icon: const Icon(Icons.notifications_none_outlined,color: ColorConstants.priceColor,)),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            const Text("Personal Info",style: TextStyle(fontFamily: 'SansPro',fontSize: 16),),
-            Padding(
-              padding: const EdgeInsets.only(right: 32,left: 32),
-              child: Container(
-                decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(16)),border: Border.all(color: Colors.black12)),
-                child: Column(
-                  children: [
-                    ContainerItem(info: "Your name",userInfo: "Hakan Baysal"),
-                    ContainerItem(info: "Country",userInfo: "Turkey"),
-                    ContainerItem(info: "City",userInfo: "Denizli"),
-                  ],
                 ),
-              ),
-            ),
-            const Text("Contact Info",style: TextStyle(fontFamily: 'SansPro',fontSize: 16),),
-            Padding(
-              padding: const EdgeInsets.only(right: 32,left: 32),
-              child: Container(
-                decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(16)),border: Border.all(color: Colors.black12)),
-                child: Column(
-                  children: [
-
-                    ContainerItem(info: "Email", userInfo: "admin@gmail.com"),
-                    ContainerItem(info: "Phone Number", userInfo: "0555 555 55 55"),
-                  ],
+                const Text("Personal Info",style: TextStyle(fontFamily: 'SansPro',fontSize: 16),),
+                Padding(
+                  padding: const EdgeInsets.only(right: 32,left: 32),
+                  child: Container(
+                    decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(16)),border: Border.all(color: Colors.black12)),
+                    child: Column(
+                      children: [
+                        ContainerItem(info: "Your name",userInfo: "Hakan Baysal"),
+                        ContainerItem(info: "Country",userInfo: "Turkey"),
+                        ContainerItem(info: "City",userInfo: "Denizli"),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
+                const Text("Contact Info",style: TextStyle(fontFamily: 'SansPro',fontSize: 16),),
+                Padding(
+                  padding: const EdgeInsets.only(right: 32,left: 32),
+                  child: Container(
+                    decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(16)),border: Border.all(color: Colors.black12)),
+                    child: Column(
+                      children: [
 
-          ],
+                        ContainerItem(info: "Email", userInfo: "admin@gmail.com"),
+                        ContainerItem(info: "Phone Number", userInfo: "0555 555 55 55"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
         ),
       ),
     );

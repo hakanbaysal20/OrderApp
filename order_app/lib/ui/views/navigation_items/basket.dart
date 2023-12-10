@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/data/entity/basket_cubit_types.dart';
 import 'package:order_app/data/entity/basket_model.dart';
 import 'package:order_app/ui/bloc/basket_cubit.dart';
 
@@ -12,11 +13,11 @@ class Basket extends StatefulWidget {
 }
 
 class _BasketState extends State<Basket> {
-  var total = 0;
   @override
   void initState() {
     super.initState();
     context.read<BasketCubit>().getBasket();
+    context.read<BasketCubit>().getTotalPrice();
   }
   @override
   Widget build(BuildContext context) {
@@ -31,19 +32,18 @@ class _BasketState extends State<Basket> {
       body: Column(
         children: [
           Expanded(
-            child: BlocBuilder<BasketCubit,List<BasketModel>>(
+            child: BlocBuilder<BasketCubit,BasketCubitTypes>(
               builder: (context, productList) {
-                if(productList.isNotEmpty){
+                if(productList.basketModel.isNotEmpty){
                   return SingleChildScrollView(
                     child: Column(
                       children: [
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const BouncingScrollPhysics(),
-                          itemCount: productList.length,
+                          itemCount: productList.basketModel.length,
                           itemBuilder: (context, index) {
-                            var product = productList[index];
-                            total += (int.parse(product.product_price) * int.parse(product.product_order_amount));
+                            var product = productList.basketModel[index];
                             return Padding(
                               padding: const EdgeInsets.only(right: 16.0,left: 16.0),
                               child: Card(
@@ -77,12 +77,9 @@ class _BasketState extends State<Basket> {
                                                     fontWeight: FontWeight.w500,color: ColorConstants.priceColor),),
                                             ],
                                           ),
-
                                           const Spacer(),
-
                                           IconButton(onPressed: () {
                                             context.read<BasketCubit>().deleteProduct(int.parse(product.basket_product_id));
-                                            total = total - (int.parse(product.product_price) * int.parse(product.product_order_amount));
 
                                           }, icon: const Icon(Icons.delete),color: ColorConstants.priceColor,)
 
@@ -93,52 +90,54 @@ class _BasketState extends State<Basket> {
                                 ),
                             );
                           },),
-                        // Total Price
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(7)),
-                              gradient: LinearGradient(colors: ColorConstants.linearColorLight,begin: AlignmentDirectional.bottomEnd,end: AlignmentDirectional.topStart),
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(32),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text("Subtotal",style: TextStyle(color: ColorConstants.white,fontFamily: 'SansPro',fontSize: 14),),
-                                      Text("₺${total.toString()}",style: const TextStyle(fontFamily: 'SansPro',color: ColorConstants.white,fontSize: 16),),
-                                    ],
-                                  ),
-                                ),
-                                // TextButton
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 32,left: 32,bottom: 16),
-                                  child: SizedBox(
-                                    height: 50,
-                                    width: double.infinity,
-                                    child: TextButton(
-                                        style: TextButton.styleFrom(backgroundColor: ColorConstants.white,shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(24)))),
-                                        onPressed: () {
-
-                                        }, child: const Text("Place my order",style: TextStyle(fontSize: 18,fontFamily: 'SansPro',color: ColorConstants.priceColor),)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-
                       ],
                     ),
                   );
                 }else{
                   return const Center();
                 }
-
               },),
+          ),
+          BlocBuilder<BasketCubit,BasketCubitTypes>(
+            builder: (context,state) {
+              var total = state.totalPrice;
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(7)),
+                    gradient: LinearGradient(colors: ColorConstants.linearColorLight,begin: AlignmentDirectional.bottomEnd,end: AlignmentDirectional.topStart),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(32),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Subtotal",style: TextStyle(color: ColorConstants.white,fontFamily: 'SansPro',fontSize: 14),),
+                            Text("₺$total",style: const TextStyle(fontFamily: 'SansPro',color: ColorConstants.white,fontSize: 16),),
+                          ],
+                        ),
+                      ),
+                      // TextButton
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32,left: 32,bottom: 16),
+                        child: SizedBox(
+                          height: 50,
+                          width: double.infinity,
+                          child: TextButton(
+                              style: TextButton.styleFrom(backgroundColor: ColorConstants.white,shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(24)))),
+                              onPressed: () {
+
+                              }, child: const Text("Place my order",style: TextStyle(fontSize: 18,fontFamily: 'SansPro',color: ColorConstants.priceColor),)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
           ),
 
         ],
