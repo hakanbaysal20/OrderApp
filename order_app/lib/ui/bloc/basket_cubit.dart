@@ -4,7 +4,7 @@ import 'package:order_app/data/entity/basket_model.dart';
 import 'package:order_app/data/repo/order_dao_repository.dart';
 
 class BasketCubit extends Cubit<BasketCubitTypes>{
-  BasketCubit():super(BasketCubitTypes(basketModel: [], totalPrice: 0));
+  BasketCubit():super(BasketCubitTypes(basketModel: <BasketModel>[], totalPrice: 0));
 
   var pRepo = OrderDaoRepository();
 

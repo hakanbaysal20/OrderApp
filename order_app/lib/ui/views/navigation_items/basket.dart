@@ -35,64 +35,60 @@ class _BasketState extends State<Basket> {
             child: BlocBuilder<BasketCubit,BasketCubitTypes>(
               builder: (context, productList) {
                 if(productList.basketModel.isNotEmpty){
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: productList.basketModel.length,
-                          itemBuilder: (context, index) {
-                            var product = productList.basketModel[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 16.0,left: 16.0),
-                              child: Card(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                      color: ColorConstants.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: ColorConstants.black.withOpacity(0.05), blurRadius: 1),
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: productList.basketModel.length,
+                    itemBuilder: (context, index) {
+                      var product = productList.basketModel[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 16.0,left: 16.0),
+                        child: Card(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                color: ColorConstants.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: ColorConstants.black.withOpacity(0.05), blurRadius: 1),
+                                ],
+                              ),
+                              child:  Padding(
+                                padding: const EdgeInsets.only(right: 12, left: 12),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                        height: 64,
+                                        width: 64,
+                                        child: Image.network("${StringConstants.getImage}${product.product_image_name}")),
+                                    const SizedBox(width: 10),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(product.product_name,style: const TextStyle(fontSize: 18,fontFamily: StringConstants.primaryFontFamily,fontWeight: FontWeight.w500),),
+                                        Text("${product.product_order_amount} ${StringConstants.amount}",style: const TextStyle(fontSize: 14,fontFamily: StringConstants.primaryFontFamily,color: ColorConstants.black54),),
+                                        Text(
+                                          "₺${int.parse(product.product_price) * int.parse(product.product_order_amount)}",
+                                          style: const TextStyle(fontSize: 18,fontFamily: StringConstants.primaryFontFamily,
+                                              fontWeight: FontWeight.w500,color: ColorConstants.priceColor),),
                                       ],
                                     ),
-                                    child:  Padding(
-                                      padding: const EdgeInsets.only(right: 12, left: 12),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                              height: 64,
-                                              width: 64,
-                                              child: Image.network("${StringConstants.getImage}${product.product_image_name}")),
-                                          const SizedBox(width: 10),
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(product.product_name,style: const TextStyle(fontSize: 18,fontFamily: StringConstants.primaryFontFamily,fontWeight: FontWeight.w500),),
-                                              Text("${product.product_order_amount} ${StringConstants.amount}",style: const TextStyle(fontSize: 14,fontFamily: StringConstants.primaryFontFamily,color: ColorConstants.black54),),
-                                              Text(
-                                                "₺${int.parse(product.product_price) * int.parse(product.product_order_amount)}",
-                                                style: const TextStyle(fontSize: 18,fontFamily: StringConstants.primaryFontFamily,
-                                                    fontWeight: FontWeight.w500,color: ColorConstants.priceColor),),
-                                            ],
-                                          ),
-                                          const Spacer(),
-                                          IconButton(onPressed: () {
-                                            context.read<BasketCubit>().deleteProduct(int.parse(product.basket_product_id));
+                                    const Spacer(),
+                                    IconButton(onPressed: () {
+                                      context.read<BasketCubit>().deleteProduct(int.parse(product.basket_product_id));
 
-                                          }, icon: const Icon(Icons.delete),color: ColorConstants.priceColor,)
+                                    }, icon: const Icon(Icons.delete),color: ColorConstants.priceColor,)
 
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  ],
                                 ),
-                            );
-                          },),
-                      ],
-                    ),
-                  );
+                              ),
+                            ),
+                          ),
+                      );
+                    },);
+                }else if(productList.basketModel.isEmpty){
+                  return const Center();
                 }else{
                   return const Center();
                 }

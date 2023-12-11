@@ -13,7 +13,7 @@ class ProfileModel{
         user_id: key,
         user_name: json["user_name"] as String,
         user_email: json["user_email"] as String,
-        city: json["city"] as String,
+        city: json["user_city"] as String,
     );
   }
 }
