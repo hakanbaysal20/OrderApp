@@ -84,11 +84,20 @@ class OrderDaoRepository{
   Future<void> addToBasket(String product_name,String product_image_name,String product_price,String product_order_amount) async{
     var url ="http://kasimadalan.pe.hu/yemekler/sepeteYemekEkle.php";
     var user_id = FirebaseAuth.instance.currentUser!.uid;
+    var currentBasket = await getBasket();
+    var total = 0;
+    for(var product in currentBasket){
+      if(product.product_name == product_name){
+        total = total + int.parse(product.product_order_amount);
+        deleteProduct(int.parse(product.basket_product_id));
+      }
+    }
+    total = total + int.parse(product_order_amount);
     var data = {
       "yemek_adi":product_name,
       "yemek_resim_adi":product_image_name,
       "yemek_fiyat":int.parse(product_price),
-      "yemek_siparis_adet":int.parse(product_order_amount),
+      "yemek_siparis_adet": total,
       "kullanici_adi":user_id};
     var response = await Dio().post(url,data: FormData.fromMap(data));
     print("Add products: ${response.data.toString()}");
@@ -115,7 +124,7 @@ class OrderDaoRepository{
     if(getProducts.isEmpty){
       return total;
     }else{
-      for(BasketModel i in getProducts){
+      for(var i in getProducts){
         total += int.parse(i.product_price) * int.parse(i.product_order_amount);
       }
     }
@@ -194,8 +203,12 @@ class OrderDaoRepository{
   // Favourite Process
   Future<bool> checkFavourite(product_id) async{
     var checkFavourite = false;
+    var userId = FirebaseAuth.instance.currentUser!.uid;
     final collectionFavourites = firestore.collection("Favourites");
-    QuerySnapshot querySnapshot = await collectionFavourites.where("product_id",isEqualTo: product_id).get();
+    QuerySnapshot querySnapshot = await collectionFavourites
+        .where("product_id",isEqualTo: product_id)
+        .where("user_id",isEqualTo: userId)
+        .get();
     if(querySnapshot.docs.isNotEmpty){
       print("dolu");
       return checkFavourite = true;
