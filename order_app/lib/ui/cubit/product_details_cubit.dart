@@ -1,6 +1,6 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/data/entity/list_type.dart';
+import 'package:order_app/data/entity/details_cubit_types.dart';
 import 'package:order_app/data/repo/authentication_repository.dart';
 import 'package:order_app/data/repo/basket_repo.dart';
 import 'package:order_app/data/repo/product_repository.dart';

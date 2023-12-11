@@ -10,14 +10,15 @@ class OnboardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        SizedBox(height: 300,width: 300,child: Image.asset(model.image,alignment: Alignment.center,fit: BoxFit.fitWidth,)),
+        SizedBox(height: screenWidth * 0.7,width: screenWidth * 0.7,child: Image.asset(model.image,alignment: Alignment.center,fit: BoxFit.fitWidth,)),
 
         Text(model.title,textAlign: TextAlign.center,softWrap: true,style: const TextStyle(color: ColorConstants.black,fontSize: 18,fontWeight: FontWeight.w500),),
 
         Padding(
-          padding: const EdgeInsets.only(right: 64.0,left: 64.0),
+          padding: EdgeInsets.only(right: screenWidth * 0.16,left: screenWidth * 0.16),
           child: Text(model.subtitle,textAlign: TextAlign.center,softWrap: true,style: TextStyle(color: Color(0xFF3B3B3B),fontSize: 12,),),
         )
       ],

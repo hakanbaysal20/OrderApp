@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/data/constants/color_constants.dart';
 import 'package:order_app/data/constants/string_constants.dart';
-import 'package:order_app/data/entity/list_type.dart';
+import 'package:order_app/data/entity/details_cubit_types.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/ui/cubit/product_details_cubit.dart';
 
@@ -27,10 +27,12 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
 
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //rectangle
           Container(
@@ -47,7 +49,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             child: Column(
               children: [
                  Padding(
-                  padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
+                  padding: EdgeInsets.only(left: screenWidth * 0.05,right: screenWidth * 0.05,top: screenWidth * 0.05),
                   child: BlocBuilder<ProductDetailsCubit,ListType>(
                     builder: (context,state) {
                       var checkFavourite = state.checkFavourite;
@@ -56,7 +58,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         children: [
                           IconButton(onPressed: () {
                             Navigator.pop(context);
-                          }, icon: const Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
+                          }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: screenWidth * 0.08,)),
                           IconButton(onPressed: () {
                             setState(() {
                             if(checkFavourite == false){
@@ -91,7 +93,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           // bottom widgets
           Padding(
-            padding: const EdgeInsets.only(right: 32,left: 32,top: 8),
+            padding: EdgeInsets.only(right: screenWidth * 0.08,left: screenWidth * 0.08,top: screenWidth * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -121,18 +123,21 @@ class _ProductDetailsState extends State<ProductDetails> {
               ],
             ),
           ),
-          Text("₺ ${widget.product.product_price}",textAlign: TextAlign.start,style: const TextStyle(color: ColorConstants.priceColor,fontSize: 24),),
           Padding(
-            padding: const EdgeInsets.only(right: 16,left: 16),
+            padding: EdgeInsets.only(left:screenWidth * 0.08),
+            child: Text("₺ ${widget.product.product_price}",textAlign: TextAlign.start,style: const TextStyle(color: ColorConstants.priceColor,fontSize: 24),),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: screenWidth * 0.04,left: screenWidth * 0.04),
             child: Row(
               children: [
                 Container(
-                  width: 54,
-                  height: 45,
+                  width: screenWidth * 0.13,
+                  height: screenWidth * 0.12,
                   decoration: BoxDecoration(border: Border.all(color: ColorConstants.blackLight,width: 2),borderRadius: const BorderRadius.all(Radius.circular(8))),
                   child: const Icon(Icons.location_on,color: ColorConstants.priceColor,),
                 ),
-                const SizedBox(width: 10,),
+                SizedBox(width: screenWidth * 0.02,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -144,16 +149,16 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 16,left: 16),
+            padding: EdgeInsets.only(right: screenWidth * 0.04,left: screenWidth * 0.04),
             child: Row(
               children: [
                 Container(
-                  width: 54,
-                  height: 45,
+                  width: screenWidth * 0.13,
+                  height: screenWidth * 0.12,
                   decoration: BoxDecoration(border: Border.all(color: ColorConstants.blackLight,width: 2),borderRadius: const BorderRadius.all(Radius.circular(8))),
                   child: const Icon(Icons.watch_later,color: ColorConstants.priceColor,),
                 ),
-                const SizedBox(width: 10,),
+                SizedBox(width: screenWidth * 0.02),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

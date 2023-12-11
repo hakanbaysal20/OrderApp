@@ -19,14 +19,15 @@ class _RegistrationState extends State<Registration> {
   var userCityController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 40,),
+            SizedBox(height: screenWidth * 0.12),
             Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+              padding: EdgeInsets.only(left: screenWidth * 0.04),
               child: Row(
                 children: [
                   IconButton(
@@ -39,9 +40,9 @@ class _RegistrationState extends State<Registration> {
 
             Image.asset("assets/images/ic_logo.png",color: ColorConstants.priceColor,),
             const Text("Foodi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'Roboto' ,fontSize: 42,fontWeight: FontWeight.w500)),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 16.0),
-              child: Text("Grab your favourite food",style: TextStyle(fontSize: 20,fontFamily: 'Roboto',color: ColorConstants.priceColor,fontWeight: FontWeight.w500),),
+             Padding(
+              padding: EdgeInsets.only(bottom: screenWidth * 0.04),
+              child: const Text("Grab your favourite food",style: TextStyle(fontSize: 20,fontFamily: 'Roboto',color: ColorConstants.priceColor,fontWeight: FontWeight.w500),),
             ),
             CustomTextField(obscureText: false, hintText: "Name", icon: const Icon(Icons.person_add,color: ColorConstants.priceColor,), controller: userNameController),
             CustomTextField(obscureText: false, hintText: "E-mail", icon: const Icon(Icons.mail_outline,color: ColorConstants.priceColor),controller: emailController,),
@@ -53,7 +54,7 @@ class _RegistrationState extends State<Registration> {
               context.read<RegistrationCubit>().registration(context,emailController.text, passwordController.text, passwordAgainController.text,userCityController.text,userNameController.text);
 
             },style: TextButton.styleFrom(backgroundColor: ColorConstants.priceColor,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
-                child: Container(width: 300,child: const Text("Sign up",style: TextStyle(color: ColorConstants.white,fontFamily: 'Roboto',fontSize: 16),textAlign: TextAlign.center))),
+                child: Container(width: screenWidth * 0.7,child: const Text("Sign up",style: TextStyle(color: ColorConstants.white,fontFamily: 'Roboto',fontSize: 16),textAlign: TextAlign.center))),
 
           ],
         ),

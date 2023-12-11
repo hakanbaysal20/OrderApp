@@ -22,19 +22,20 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
   }
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 32.0),
+            padding: EdgeInsets.only(top: screenWidth * 0.08),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
                     onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login(),));
-                }, child: Row(
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Login(),));
+                }, child: const Row(
                   children: [
                     Text("Login",style: TextStyle(color: ColorConstants.priceColor),),
                     Icon(Icons.arrow_forward_ios,color: ColorConstants.priceColor,),
@@ -45,7 +46,7 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
           ),
          SizedBox(
            width: double.infinity,
-           height: 420,
+           height: screenWidth * 1,
            child: PageView.builder(
              onPageChanged: (value) {
                setState(() {
@@ -60,11 +61,11 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
          ),
 
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(screenWidth * 0.04),
             child: TabPageSelector(
               selectedColor: ColorConstants.priceColor,
               borderStyle: BorderStyle.none,
-              indicatorSize: 10,
+              indicatorSize: screenWidth * 0.025,
               color: Colors.black12,
               controller: tabController,
             ),

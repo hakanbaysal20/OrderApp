@@ -20,6 +20,9 @@ class _BasketState extends State<Basket> {
   }
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -41,7 +44,7 @@ class _BasketState extends State<Basket> {
                     itemBuilder: (context, index) {
                       var product = productList.basketModel[index];
                       return Padding(
-                        padding: const EdgeInsets.only(right: 16.0,left: 16.0),
+                        padding: EdgeInsets.only(right: screenWidth * 0.04,left: screenWidth * 0.04),
                         child: Card(
                             child: Container(
                               decoration: BoxDecoration(
@@ -53,14 +56,14 @@ class _BasketState extends State<Basket> {
                                 ],
                               ),
                               child:  Padding(
-                                padding: const EdgeInsets.only(right: 12, left: 12),
+                                padding: EdgeInsets.only(right: screenWidth * 0.03, left: screenWidth * 0.03),
                                 child: Row(
                                   children: [
                                     SizedBox(
-                                        height: 64,
-                                        width: 64,
+                                        height: screenHeight * 0.15,
+                                        width: screenWidth * 0.15,
                                         child: Image.network("${StringConstants.getImage}${product.product_image_name}")),
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: screenWidth * 0.02),
                                     Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +96,7 @@ class _BasketState extends State<Basket> {
             builder: (context,state) {
               var total = state.totalPrice;
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(screenWidth * 0.02),
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -102,7 +105,7 @@ class _BasketState extends State<Basket> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(screenWidth * 0.04),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -113,7 +116,7 @@ class _BasketState extends State<Basket> {
                       ),
                       // TextButton
                       Padding(
-                        padding: const EdgeInsets.only(right: 32,left: 32,bottom: 16),
+                        padding: EdgeInsets.only(right: screenWidth * 0.08,left: screenWidth * 0.08,bottom: screenWidth * 0.04),
                         child: SizedBox(
                           height: 50,
                           width: 300,

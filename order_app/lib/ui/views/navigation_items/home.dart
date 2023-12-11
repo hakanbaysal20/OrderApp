@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
   }
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: ColorConstants.white,
       appBar: AppBar(
@@ -42,8 +43,8 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
-                  width: 316,
-                  height: 50,
+                  width: screenWidth * 0.74,
+                  height: screenWidth * 0.13,
                   child: TextField(
                     controller: tf,
                     onChanged: (value) {
@@ -55,7 +56,7 @@ class _HomeState extends State<Home> {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorConstants.whiteLight,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      contentPadding: EdgeInsets.symmetric(vertical: screenWidth * 0.04, horizontal: screenWidth * 0.05),
                       suffixIcon: isThereSearch ? GestureDetector(onTap: () {
                         setState(() {
                           tf.clear();
@@ -66,7 +67,6 @@ class _HomeState extends State<Home> {
                       },child: const Icon(Icons.close)) : GestureDetector(onTap: () {
 
                       }, child: const Icon(Icons.search),),
-
                       hintText: StringConstants.search,
                       hintStyle: const TextStyle(color: ColorConstants.dark, fontSize: 18, fontFamily: StringConstants.primaryFontFamily),
                       enabledBorder: OutlineInputBorder(
@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
                     itemBuilder: (context, index) {
                       var product = productList[index];
                       return Padding(
-                        padding: const EdgeInsets.only(right: 24,left: 24,bottom: 12,top: 12),
+                        padding: EdgeInsets.only(right: screenWidth * 0.06,left: screenWidth * 0.06,bottom: screenWidth * 0.03,top: screenWidth * 0.03),
                         child: SizedBox(
                           height: 88,
                           child: GestureDetector(
@@ -136,14 +136,14 @@ class _HomeState extends State<Home> {
                                   ],
                                 ),
                                 child:  Padding(
-                                  padding: const EdgeInsets.only(right: 12, left: 12),
+                                  padding: EdgeInsets.only(right: screenWidth * 0.03, left: screenWidth * 0.03),
                                   child: Row(
                                     children: [
                                       SizedBox(
-                                          height: 64,
-                                          width: 64,
+                                          height: screenWidth * 0.16,
+                                          width: screenWidth * 0.16,
                                           child: Image.network("${StringConstants.getImage}${product.product_image}")),
-                                      const SizedBox(width: 10),
+                                      SizedBox(width: screenWidth * 0.025),
                                       Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.start,

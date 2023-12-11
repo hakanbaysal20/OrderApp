@@ -19,6 +19,8 @@ class _FavoriteState extends State<Favorite> {
   }
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -37,7 +39,7 @@ class _FavoriteState extends State<Favorite> {
            itemBuilder: (context, index) {
             var product = state[index];
             return Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: EdgeInsets.all(screenWidth * 0.01),
               child: Card(
                 child: Container(
                   decoration: BoxDecoration(
@@ -45,7 +47,7 @@ class _FavoriteState extends State<Favorite> {
                     boxShadow: [  BoxShadow(
                       color: ColorConstants.black.withOpacity(0.05), blurRadius: 1),
                   ],
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      borderRadius: BorderRadius.all(Radius.circular(screenWidth * 0.03)),
                       ),
                   child: Column(
                     children: [
@@ -55,7 +57,7 @@ class _FavoriteState extends State<Favorite> {
                            IconButton(onPressed: () {
                              context.read<FavouriteCubit>().deleteFavorite(product.product_id);
 
-                           }, icon: const Icon(Icons.close_outlined ,color: ColorConstants.black45,size: 25,))
+                           }, icon: Icon(Icons.close_outlined ,color: ColorConstants.black45,size: screenWidth * 0.06,))
                          ],
                        ),
                       Image.network(product.product_image_url),

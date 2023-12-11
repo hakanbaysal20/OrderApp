@@ -10,17 +10,18 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(screenWidth * 0.04),
       child: SizedBox(
-        width: 340,
-        height: 50,
+        width: screenWidth * 0.8,
+        height: screenWidth * 0.14,
         child: TextField(
           controller: controller,
           obscureText: obscureText,
           style: TextStyle(color: Colors.black54,fontFamily: 'Roboto',fontWeight: FontWeight.w500,fontSize: 18),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 15),
+            contentPadding: EdgeInsets.symmetric(vertical: screenWidth * 0.045),
             prefixIcon: icon,
             hintText: hintText,
             hintStyle: TextStyle(color: Colors.black12,fontSize: 18,fontFamily: 'Roboto'),

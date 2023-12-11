@@ -26,6 +26,7 @@ class _SplashState extends State<Splash> {
   }
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: ColorConstants.transparent,
       body: Container(
@@ -41,8 +42,8 @@ class _SplashState extends State<Splash> {
             Visibility(
               visible: imageOpacity == 1,
               child: SizedBox(
-                width: 80,
-                height: 80,
+                width: screenWidth * 0.2,
+                height: screenWidth * 0.2,
                 child: buildAnimatedOpacityLottie("loading"),
               ),
             ),
