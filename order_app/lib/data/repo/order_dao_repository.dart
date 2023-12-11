@@ -150,6 +150,9 @@ class OrderDaoRepository{
         print(e);
       }
   }
+  Future<void> signOut() async{
+    await FirebaseAuth.instance.signOut();
+  }
 
   // Onboard Cubit
   Future<void> changeIndicator(int value,TabController tabController) async{

@@ -5,6 +5,7 @@ import 'package:order_app/constants/string_constants.dart';
 import 'package:order_app/data/entity/profile_model.dart';
 import 'package:order_app/enums/image_constants.dart';
 import 'package:order_app/ui/bloc/profile_cubit.dart';
+import 'package:order_app/ui/views/login.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -71,10 +72,16 @@ class _ProfileState extends State<Profile> {
                                       children: [
 
                                         ContainerItem(info: StringConstants.email, userInfo: user.user_email),
+                                        TextButton(onPressed: () async{
+                                          context.read<ProfileCubit>().signOut();
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(),));
+
+                                        }, child: const Text("Sign out",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily),)),
                                       ],
                                     ),
                                   ),
                                 ),
+
 
                               ],
                         );
