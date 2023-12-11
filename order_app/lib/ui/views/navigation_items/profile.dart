@@ -6,6 +6,7 @@ import 'package:order_app/data/entity/profile_model.dart';
 import 'package:order_app/enums/image_constants.dart';
 import 'package:order_app/ui/bloc/profile_cubit.dart';
 import 'package:order_app/ui/views/login.dart';
+import 'package:order_app/ui/views/widgets/container.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -44,7 +45,6 @@ class _ProfileState extends State<Profile> {
                           Container(
                             decoration: BoxDecoration(color: ColorConstants.red.withOpacity(0.1),borderRadius: const BorderRadius.all(Radius.circular(12))),
                             child: IconButton(onPressed: () {
-
                                         }, icon: const Icon(Icons.notifications_none_outlined,color: ColorConstants.priceColor,)),
                                       ),
                                     ],
@@ -81,8 +81,6 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   ),
                                 ),
-
-
                               ],
                         );
               }
@@ -90,31 +88,9 @@ class _ProfileState extends State<Profile> {
           }
         ),
               ),
-
           );
         }
 
   }
 
 
-class ContainerItem extends StatelessWidget {
-  String info;
-  String userInfo;
-   ContainerItem({
-    super.key,required this.info,required this.userInfo
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(info,style: const TextStyle(fontSize: 14,fontFamily: StringConstants.primaryFontFamily),),
-          Text(userInfo,style: const TextStyle(fontSize: 14,fontFamily: StringConstants.primaryFontFamily)),
-        ],
-      ),
-    );
-  }
-}

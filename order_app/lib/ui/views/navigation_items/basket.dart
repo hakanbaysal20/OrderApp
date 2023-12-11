@@ -77,9 +77,7 @@ class _BasketState extends State<Basket> {
                                     const Spacer(),
                                     IconButton(onPressed: () {
                                       context.read<BasketCubit>().deleteProduct(int.parse(product.basket_product_id));
-
                                     }, icon: const Icon(Icons.delete),color: ColorConstants.priceColor,)
-
                                   ],
                                 ),
                               ),

@@ -20,7 +20,11 @@ class OrderDaoRepository{
   }
   // Basket Response
   List<BasketModel> parseBasketModel(String response){
-    return BasketResponse.fromJson(json.decode(response)).basket_products;
+        try{
+          return BasketResponse.fromJson(json.decode(response)).basket_products;
+        }catch (e){
+          return [];
+        }
   }
   // User process
   var collectionUser = FirebaseFirestore.instance.collection("Users");
@@ -93,7 +97,6 @@ class OrderDaoRepository{
   // Basket Process
   Future<void> deleteProduct(int yemek_sepet_id) async{
     var userId = FirebaseAuth.instance.currentUser!.uid;
-
     var url = "http://kasimadalan.pe.hu/yemekler/sepettenYemekSil.php";
     var data = {"sepet_yemek_id":yemek_sepet_id,"kullanici_adi":userId};
     var response = await Dio().post(url,data: FormData.fromMap(data));
@@ -109,8 +112,12 @@ class OrderDaoRepository{
   Future<int> totalPrice() async{
     var getProducts = await getBasket();
     var total = 0;
-    for(BasketModel i in getProducts){
-      total += int.parse(i.product_price) * int.parse(i.product_order_amount);
+    if(getProducts.isEmpty){
+      return total;
+    }else{
+      for(BasketModel i in getProducts){
+        total += int.parse(i.product_price) * int.parse(i.product_order_amount);
+      }
     }
     return total;
   }
