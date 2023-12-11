@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/data/constants/string_constants.dart';
 import 'package:order_app/ui/cubit/registration_cubit.dart';
 import 'package:order_app/ui/widgets/customTextField.dart';
 
@@ -17,6 +18,17 @@ class _RegistrationState extends State<Registration> {
   var passwordAgainController = TextEditingController();
   var userNameController = TextEditingController();
   var userCityController = TextEditingController();
+  var selectedCity = "Adana";
+  var cityList = <String>["Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale",
+    "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay",
+    "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa",
+    "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat",
+    "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"];
+
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -33,7 +45,7 @@ class _RegistrationState extends State<Registration> {
                   IconButton(
                       onPressed: () {
                         Navigator.pop(context);
-                      }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 35,)),
+                      }, icon: const Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 35,)),
                 ],
               ),
             ),
@@ -46,11 +58,34 @@ class _RegistrationState extends State<Registration> {
             ),
             CustomTextField(obscureText: false, hintText: "Name", icon: const Icon(Icons.person_add,color: ColorConstants.priceColor,), controller: userNameController),
             CustomTextField(obscureText: false, hintText: "E-mail", icon: const Icon(Icons.mail_outline,color: ColorConstants.priceColor),controller: emailController,),
-            CustomTextField(obscureText: false, hintText: "City", icon: const Icon(Icons.location_on,color: ColorConstants.priceColor,), controller: userCityController),
+            Padding(
+              padding: EdgeInsets.all(screenWidth * 0.04),
+              child: DropdownButtonFormField(
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.location_on,color: ColorConstants.priceColor,),
+                    enabledBorder:OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),hintText: "Şehir seç",
+                    border:OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(7)),
+                value: selectedCity,
+                icon: const Icon(Icons.arrow_drop_down),
+                items: cityList.map((city){
+                return DropdownMenuItem(
+                    value: city,
+                    child: Text(city,style: const TextStyle(color: ColorConstants.black54,fontFamily: 'Roboto',fontSize: 18),));
+              }).toList(),
+              onChanged: (data) {
+                  setState(() {
+                    selectedCity = data!;
+                  });
+              },
+              ),
+            ),
             CustomTextField(obscureText: true, hintText: "Password", icon: const Icon(Icons.lock_outline,color: ColorConstants.priceColor),controller: passwordController),
             CustomTextField(obscureText: true, hintText: "Password Again", icon: const Icon(Icons.lock_outline,color: ColorConstants.priceColor),controller: passwordAgainController),
 
             TextButton(onPressed: () {
+              userCityController.text = selectedCity;
               context.read<RegistrationCubit>().registration(context,emailController.text, passwordController.text, passwordAgainController.text,userCityController.text,userNameController.text);
 
             },style: TextButton.styleFrom(backgroundColor: ColorConstants.priceColor,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),

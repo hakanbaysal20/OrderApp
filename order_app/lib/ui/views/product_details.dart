@@ -102,7 +102,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: BlocBuilder<ProductDetailsCubit,ListType>(
                     builder: (context,state) {
                       var value = state.productAmount;
-
                       return Row(
                       children: [
                         IconButton(onPressed: () {

@@ -9,6 +9,6 @@ class RegistrationCubit extends Cubit<void>{
   var authRepo = AuthenticationDaoRepository();
 
   Future<void> registration(BuildContext context,String email, String password, String passwordAgain,String userCity,String userName) async{
-    await authRepo.registration(context,email, password, passwordAgain,userName,userCity);
+    await authRepo.registration(context,email, password, passwordAgain,userCity,userName);
   }
 }
