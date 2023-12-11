@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/constants/string_constants.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/ui/bloc/home_cubit.dart';
 import 'package:order_app/ui/views/product_details.dart';
@@ -26,12 +27,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstants.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          "Menu",
-          style: TextStyle(fontSize: 26, fontFamily: 'SansPro', fontWeight: FontWeight.w500),
+          StringConstants.menu,
+          style: TextStyle(fontSize: 26, fontFamily: StringConstants.primaryFontFamily, fontWeight: FontWeight.w500),
         ),
       ),
       body: SingleChildScrollView(
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
                     },
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color(0xFFF4F6F9),
+                      fillColor: ColorConstants.whiteLight,
                       contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       suffixIcon: isThereSearch ? GestureDetector(onTap: () {
                         setState(() {
@@ -66,14 +67,14 @@ class _HomeState extends State<Home> {
 
                       }, child: const Icon(Icons.search),),
 
-                      hintText: "Search",
-                      hintStyle: const TextStyle(color: Color(0xFF09101D), fontSize: 18, fontFamily: 'SansPro'),
+                      hintText: StringConstants.search,
+                      hintStyle: const TextStyle(color: ColorConstants.dark, fontSize: 18, fontFamily: StringConstants.primaryFontFamily),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(color: ColorConstants.white),
                         borderRadius: BorderRadius.circular(37),
                       ),
                       border: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFF4F6F9)),
+                        borderSide: const BorderSide(color: ColorConstants.whiteLight),
                         borderRadius: BorderRadius.circular(37),
                       ),
                     ),
@@ -95,12 +96,12 @@ class _HomeState extends State<Home> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF43F5E).withOpacity(0.1),
+                      color: ColorConstants.priceColor.withOpacity(0.1),
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
                     ),
                     width: 50,
                     height: 50,
-                    child: const Icon(Icons.filter_list_outlined, color: Color(0xFFF43F5E)),
+                    child: const Icon(Icons.filter_list_outlined, color: ColorConstants.priceColor),
                   ),
                 ),
               ],
@@ -128,10 +129,10 @@ class _HomeState extends State<Home> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                  color: Colors.white,
+                                  color: ColorConstants.white,
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.blue.withOpacity(0.08), blurRadius: 100,),
+                                        color: ColorConstants.blue.withOpacity(0.08), blurRadius: 100,),
                                   ],
                                 ),
                                 child:  Padding(
@@ -141,20 +142,20 @@ class _HomeState extends State<Home> {
                                       SizedBox(
                                           height: 64,
                                           width: 64,
-                                          child: Image.network("http://kasimadalan.pe.hu/yemekler/resimler/${product.product_image}")),
+                                          child: Image.network("${StringConstants.getImage}${product.product_image}")),
                                       const SizedBox(width: 10),
                                       Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(product.product_name,style: const TextStyle(fontSize: 18,fontFamily: 'SansPro',fontWeight: FontWeight.w500),),
-                                          const Text("Loovy food",style: TextStyle(fontSize: 14,fontFamily: 'SansPro',color: Colors.black54),),
+                                          Text(product.product_name,style: const TextStyle(fontSize: 18,fontFamily: StringConstants.primaryFontFamily,fontWeight: FontWeight.w500),),
+                                          const Text(StringConstants.loovyFood,style: TextStyle(fontSize: 14,fontFamily: StringConstants.primaryFontFamily,color: ColorConstants.black54),),
                                         ],
                                       ),
                                       const Spacer(),
                                       Text(
                                         "₺${product.product_price}",
-                                        style: const TextStyle(fontSize: 29,fontFamily: 'SansPro',
+                                        style: const TextStyle(fontSize: 29,fontFamily: StringConstants.primaryFontFamily,
                                             fontWeight: FontWeight.w500,color: ColorConstants.priceColor),),
                                     ],
                                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/constants/string_constants.dart';
 import 'package:order_app/data/entity/list_type.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/ui/bloc/product_details_cubit.dart';
@@ -63,7 +64,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   backgroundColor: ColorConstants.white,
-                                  content:Text("${widget.product.product_name} favorilere eklendi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'SansPro',fontSize: 16),),
+                                  content:Text("${widget.product.product_name} favorilere eklendi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
                                 ),
                               );
                               Navigator.pop(context);
@@ -72,7 +73,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   backgroundColor: ColorConstants.white,
-                                  content:Text("${widget.product.product_name} favorilerden silindi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'SansPro',fontSize: 16),),
+                                  content:Text("${widget.product.product_name} favorilerden silindi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
                                 ),
                               );
                               Navigator.pop(context);
@@ -94,7 +95,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.product.product_name,style: const TextStyle(fontFamily: 'SansPro',fontSize: 24,color: ColorConstants.grey),),
+                Text(widget.product.product_name,style: const TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 24,color: ColorConstants.grey),),
                 SizedBox(
                   child: BlocBuilder<ProductDetailsCubit,ListType>(
                     builder: (context,state) {
@@ -107,11 +108,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                             context.read<ProductDetailsCubit>().decrease(value);
 
                         }, icon:  Icon(CupertinoIcons.minus_square_fill,color: const Color(0xFFF43F5E).withOpacity(0.4),)),
-                        Text(value.toString(),textAlign: TextAlign.center,style: const TextStyle(fontFamily: 'SansPro',color: Colors.grey)),
+                        Text(value.toString(),textAlign: TextAlign.center,style: const TextStyle(fontFamily: StringConstants.primaryFontFamily,color: ColorConstants.grey)),
                         IconButton(onPressed: () {
                             context.read<ProductDetailsCubit>().increase(value);
 
-                        }, icon: const Icon(CupertinoIcons.plus_square_fill,color: Colors.red,)),
+                        }, icon: const Icon(CupertinoIcons.plus_square_fill,color: ColorConstants.red,)),
                        ],
                       );
                     }
@@ -135,8 +136,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Location",style: TextStyle(fontFamily: 'SansPro',fontSize: 18,color: ColorConstants.black.withOpacity(0.7))),
-                    Text("Charbhuja Chawk , Makrana",style: TextStyle(fontFamily: 'SansPro',fontSize: 14,color: ColorConstants.black.withOpacity(0.6)),),
+                    Text("Location",style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 18,color: ColorConstants.black.withOpacity(0.7))),
+                    Text("Charbhuja Chawk , Makrana",style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 14,color: ColorConstants.black.withOpacity(0.6)),),
                   ],
                 ),
               ],
@@ -156,8 +157,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Delivery Time",style: TextStyle(fontFamily: 'SansPro',fontSize: 18,color: ColorConstants.black.withOpacity(0.7))),
-                    Text("30 Times",style: TextStyle(fontFamily: 'SansPro',fontSize: 14,color: ColorConstants.black.withOpacity(0.6)),),
+                    Text(StringConstants.deliveryTime,style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 18,color: ColorConstants.black.withOpacity(0.7))),
+                    Text("30 Times",style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 14,color: ColorConstants.black.withOpacity(0.6)),),
                   ],
                 ),
               ],
@@ -177,7 +178,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           backgroundColor: ColorConstants.white,
-                          content:Text("${product.product_name} sepete eklendi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'SansPro',fontSize: 16),),
+                          content:Text("${product.product_name} sepete eklendi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
                         ),
                     );
                     Navigator.pop(context);
@@ -193,12 +194,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("$num items",style: const TextStyle(color: ColorConstants.white,fontSize: 16,fontWeight: FontWeight.w500,fontFamily: 'SansPro')),
-                              Text("₺ $total",style: const TextStyle(color: ColorConstants.white,fontSize: 24,fontFamily: 'SansPro',fontWeight: FontWeight.w500)),
+                              Text("$num items",style: const TextStyle(color: ColorConstants.white,fontSize: 16,fontWeight: FontWeight.w500,fontFamily: StringConstants.primaryFontFamily)),
+                              Text("₺ $total",style: const TextStyle(color: ColorConstants.white,fontSize: 24,fontFamily: StringConstants.primaryFontFamily,fontWeight: FontWeight.w500)),
 
                                   ],
                                 ),
-                            const Text("Add to Card",style: TextStyle(color: ColorConstants.white,fontFamily: 'SansPro',fontWeight: FontWeight.w500,fontSize: 16)),
+                            const Text("Add to Card",style: TextStyle(color: ColorConstants.white,fontFamily: StringConstants.primaryFontFamily,fontWeight: FontWeight.w500,fontSize: 16)),
                           ],
                         ),
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/constants/string_constants.dart';
 import 'package:order_app/data/entity/favourite_model.dart';
 import 'package:order_app/ui/bloc/favourite_cubit.dart';
 class Favourite extends StatefulWidget {
@@ -22,8 +23,8 @@ class _FavouriteState extends State<Favourite> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          "Favoriler",
-          style: TextStyle(fontSize: 26, fontFamily: 'SansPro', fontWeight: FontWeight.w500),
+          StringConstants.favorite,
+          style: TextStyle(fontSize: 26, fontFamily: StringConstants.primaryFontFamily, fontWeight: FontWeight.w500),
         ),
       ),
       body: BlocBuilder<FavouriteCubit,List<FavouriteModel>>(
@@ -40,9 +41,9 @@ class _FavouriteState extends State<Favourite> {
               child: Card(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: ColorConstants.white,
                     boxShadow: [  BoxShadow(
-                      color: Colors.black.withOpacity(0.05), blurRadius: 1),
+                      color: ColorConstants.black.withOpacity(0.05), blurRadius: 1),
                   ],
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
                       ),
@@ -54,7 +55,7 @@ class _FavouriteState extends State<Favourite> {
                            IconButton(onPressed: () {
                              context.read<FavouriteCubit>().deleteFavorite(product.product_id);
 
-                           }, icon: const Icon(Icons.close_outlined ,color: Colors.black45,size: 25,))
+                           }, icon: const Icon(Icons.close_outlined ,color: ColorConstants.black45,size: 25,))
                          ],
                        ),
                       Image.network(product.product_image_url),

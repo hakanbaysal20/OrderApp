@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/constants/string_constants.dart';
 import 'package:order_app/enums/image_constants.dart';
 
 class Profile extends StatefulWidget {
@@ -26,7 +27,7 @@ class _ProfileState extends State<Profile> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    decoration: BoxDecoration(color: const Color(0xFFFF0000).withOpacity(0.1),borderRadius: const BorderRadius.all(Radius.circular(12))),
+                    decoration: BoxDecoration(color: ColorConstants.red.withOpacity(0.1),borderRadius: const BorderRadius.all(Radius.circular(12))),
                     child: IconButton(onPressed: () {
 
                         }, icon: const Icon(Icons.notifications_none_outlined,color: ColorConstants.priceColor,)),
@@ -34,30 +35,28 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                 ),
-                const Text("Personal Info",style: TextStyle(fontFamily: 'SansPro',fontSize: 16),),
+                const Text(StringConstants.personalInfo,style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
                 Padding(
                   padding: const EdgeInsets.only(right: 32,left: 32),
                   child: Container(
-                    decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(16)),border: Border.all(color: Colors.black12)),
+                    decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(16)),border: Border.all(color: ColorConstants.blackLight)),
                     child: Column(
                       children: [
-                        ContainerItem(info: "Your name",userInfo: "Hakan Baysal"),
-                        ContainerItem(info: "Country",userInfo: "Turkey"),
-                        ContainerItem(info: "City",userInfo: "Denizli"),
+                        ContainerItem(info: StringConstants.yourName,userInfo: "Hakan Baysal"),
+                        ContainerItem(info: StringConstants.city,userInfo: "Denizli"),
                       ],
                     ),
                   ),
                 ),
-                const Text("Contact Info",style: TextStyle(fontFamily: 'SansPro',fontSize: 16),),
+                const Text(StringConstants.contactInfo,style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
                 Padding(
                   padding: const EdgeInsets.only(right: 32,left: 32),
                   child: Container(
-                    decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(16)),border: Border.all(color: Colors.black12)),
+                    decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(16)),border: Border.all(color: ColorConstants.blackLight)),
                     child: Column(
                       children: [
 
-                        ContainerItem(info: "Email", userInfo: "admin@gmail.com"),
-                        ContainerItem(info: "Phone Number", userInfo: "0555 555 55 55"),
+                        ContainerItem(info: StringConstants.email, userInfo: "admin@gmail.com"),
                       ],
                     ),
                   ),
@@ -83,8 +82,8 @@ class ContainerItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(info,style: const TextStyle(fontSize: 14,fontFamily: 'SansPro'),),
-          Text(userInfo,style: const TextStyle(fontSize: 14,fontFamily: 'SansPro')),
+          Text(info,style: const TextStyle(fontSize: 14,fontFamily: StringConstants.primaryFontFamily),),
+          Text(userInfo,style: const TextStyle(fontSize: 14,fontFamily: StringConstants.primaryFontFamily)),
         ],
       ),
     );

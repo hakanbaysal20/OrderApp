@@ -3,7 +3,7 @@ import 'package:order_app/components/riverpood/google_nav_bar.dart';
 import 'package:order_app/constants/color_constants.dart';
 
 import 'package:order_app/ui/views/navigation_items/basket.dart';
-import 'package:order_app/ui/views/navigation_items/favourite.dart';
+import 'package:order_app/ui/views/navigation_items/favorite.dart';
 import 'package:order_app/ui/views/navigation_items/home.dart';
 import 'package:order_app/ui/views/navigation_items/profile.dart';
 
