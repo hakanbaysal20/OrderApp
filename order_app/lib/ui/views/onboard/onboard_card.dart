@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/data/constants/color_constants.dart';
 import 'package:order_app/data/entity/onboard_model.dart';
 
 

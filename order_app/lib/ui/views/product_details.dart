@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/constants/string_constants.dart';
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/data/constants/string_constants.dart';
 import 'package:order_app/data/entity/list_type.dart';
 import 'package:order_app/data/entity/product_model.dart';
-import 'package:order_app/ui/bloc/product_details_cubit.dart';
+import 'package:order_app/ui/cubit/product_details_cubit.dart';
 
 class ProductDetails extends StatefulWidget {
   ProductModel product;
@@ -22,7 +22,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     super.initState();
     context.read<ProductDetailsCubit>().decrease(0);
     context.read<ProductDetailsCubit>().increase(0);
-    context.read<ProductDetailsCubit>().checkFavourite(widget.product.product_id);
+    context.read<ProductDetailsCubit>().checkFavorite(widget.product.product_id);
   }
 
   @override

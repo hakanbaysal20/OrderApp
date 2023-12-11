@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/constants/string_constants.dart';
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/data/constants/string_constants.dart';
 import 'package:order_app/data/entity/product_model.dart';
-import 'package:order_app/ui/bloc/home_cubit.dart';
+import 'package:order_app/ui/cubit/home_cubit.dart';
 import 'package:order_app/ui/views/product_details.dart';
-import 'package:order_app/ui/views/widgets/filter_slide.dart';
+import 'package:order_app/ui/widgets/filter_slide.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

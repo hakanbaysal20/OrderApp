@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:order_app/constants/string_constants.dart';
+import 'package:order_app/data/constants/string_constants.dart';
 
 class ContainerItem extends StatelessWidget {
   String info;

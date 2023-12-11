@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/constants/string_constants.dart';
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/data/constants/string_constants.dart';
 import 'package:order_app/data/entity/profile_model.dart';
 import 'package:order_app/enums/image_constants.dart';
-import 'package:order_app/ui/bloc/profile_cubit.dart';
+import 'package:order_app/ui/cubit/profile_cubit.dart';
 import 'package:order_app/ui/views/login.dart';
-import 'package:order_app/ui/views/widgets/container.dart';
+import 'package:order_app/ui/widgets/container.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -74,7 +74,7 @@ class _ProfileState extends State<Profile> {
                                         ContainerItem(info: StringConstants.email, userInfo: user.user_email),
                                         TextButton(onPressed: () async{
                                           context.read<ProfileCubit>().signOut();
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(),));
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Login(),));
 
                                         }, child: const Text("Sign out",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily),)),
                                       ],

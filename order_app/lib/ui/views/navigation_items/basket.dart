@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/constants/string_constants.dart';
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/data/constants/string_constants.dart';
 import 'package:order_app/data/entity/basket_cubit_types.dart';
-import 'package:order_app/data/entity/basket_model.dart';
-import 'package:order_app/ui/bloc/basket_cubit.dart';
+import 'package:order_app/ui/cubit/basket_cubit.dart';
 
 class Basket extends StatefulWidget {
   const Basket({Key? key}) : super(key: key);
@@ -85,8 +84,6 @@ class _BasketState extends State<Basket> {
                           ),
                       );
                     },);
-                }else if(productList.basketModel.isEmpty){
-                  return const Center();
                 }else{
                   return const Center();
                 }

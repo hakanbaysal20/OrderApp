@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/data/constants/color_constants.dart';
 
 
 

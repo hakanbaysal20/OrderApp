@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
+import 'package:order_app/data/constants/color_constants.dart';
 import 'package:order_app/data/entity/onboard_model.dart';
-import 'package:order_app/ui/bloc/onboard_cubit.dart';
+import 'package:order_app/ui/cubit/onboard_cubit.dart';
 import 'package:order_app/ui/views/login.dart';
 import 'package:order_app/ui/views/onboard/onboard_card.dart';
 

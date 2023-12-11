@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:order_app/components/riverpood/google_nav_bar.dart';
-import 'package:order_app/constants/color_constants.dart';
-
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/ui/components/riverpood/google_nav_bar.dart';
 import 'package:order_app/ui/views/navigation_items/basket.dart';
 import 'package:order_app/ui/views/navigation_items/favorite.dart';
 import 'package:order_app/ui/views/navigation_items/home.dart';
@@ -24,7 +23,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     });
   }
 
-  final List<Widget> pages = [const Home(), const Basket(),const Favourite(), const Profile()];
+  final List<Widget> pages = [const Home(), const Basket(),const Favorite(), const Profile()];
 
   @override
   Widget build(BuildContext context) {

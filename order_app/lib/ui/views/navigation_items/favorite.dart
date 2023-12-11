@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/constants/string_constants.dart';
-import 'package:order_app/data/entity/favourite_model.dart';
-import 'package:order_app/ui/bloc/favourite_cubit.dart';
-class Favourite extends StatefulWidget {
-  const Favourite({Key? key}) : super(key: key);
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/data/constants/string_constants.dart';
+import 'package:order_app/data/entity/favorite_model.dart';
+import 'package:order_app/ui/cubit/favorite_cubit.dart';
+class Favorite extends StatefulWidget {
+  const Favorite({Key? key}) : super(key: key);
 
   @override
-  State<Favourite> createState() => _FavouriteState();
+  State<Favorite> createState() => _FavoriteState();
 }
 
-class _FavouriteState extends State<Favourite> {
+class _FavoriteState extends State<Favorite> {
   @override
   void initState() {
     super.initState();

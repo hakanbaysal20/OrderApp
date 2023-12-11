@@ -2,14 +2,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/data/entity/favourite_model.dart';
+import 'package:order_app/data/entity/favorite_model.dart';
 import 'package:order_app/data/entity/product_model.dart';
-import 'package:order_app/data/repo/order_dao_repository.dart';
+import 'package:order_app/data/repo/authentication_repository.dart';
+import 'package:order_app/data/repo/product_repository.dart';
 
 class FavouriteCubit extends Cubit<List<FavouriteModel>>{
   FavouriteCubit():super(<FavouriteModel>[]);
 
-  var kRepo = OrderDaoRepository();
+  var kRepo = AuthenticationDaoRepository();
   var collectionFavourites = FirebaseFirestore.instance.collection("Favourites");
 
   Future<void> favouriteList() async{
@@ -28,7 +29,7 @@ class FavouriteCubit extends Cubit<List<FavouriteModel>>{
     });
   }
   Future<void> deleteFavorite(String product_id) async{
-    await kRepo.deleteFavourite(product_id);
+    await kRepo.deleteFavorite(product_id);
     favouriteList();
   }
 }

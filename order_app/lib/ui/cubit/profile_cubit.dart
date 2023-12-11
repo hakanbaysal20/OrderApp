@@ -3,13 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/data/entity/profile_model.dart';
-import 'package:order_app/data/repo/order_dao_repository.dart';
+import 'package:order_app/data/repo/authentication_repository.dart';
+import 'package:order_app/data/repo/product_repository.dart';
 
 class ProfileCubit extends Cubit<List<ProfileModel>> {
   ProfileCubit() :super(<ProfileModel>[]);
 
   var collectionUser = FirebaseFirestore.instance.collection("Users");
-  var kRepo = OrderDaoRepository();
+  var productRepo = ProductRepository();
+  var authRepo = AuthenticationDaoRepository();
 
   Future<void> getUserInfo() async{
   var userId = FirebaseAuth.instance.currentUser!.uid;
@@ -27,6 +29,6 @@ class ProfileCubit extends Cubit<List<ProfileModel>> {
   });
   }
   Future<void> signOut() async{
-    await kRepo.signOut();
+    await authRepo.signOut();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/ui/bloc/registration_cubit.dart';
-import 'package:order_app/ui/views/widgets/customTextField.dart';
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/ui/cubit/registration_cubit.dart';
+import 'package:order_app/ui/widgets/customTextField.dart';
 
 class Registration extends StatefulWidget {
   const Registration({Key? key}) : super(key: key);

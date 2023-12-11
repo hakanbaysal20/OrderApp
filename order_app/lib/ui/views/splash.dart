@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/ui/bloc/splash_cubit.dart';
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/ui/cubit/splash_cubit.dart';
 import 'package:order_app/ui/views/lottie/lottie_widget.dart';
-import 'package:order_app/ui/views/onboard/onboard.dart';
 
 
 class Splash extends StatefulWidget {

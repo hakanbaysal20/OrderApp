@@ -1,11 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:order_app/constants/color_constants.dart';
-import 'package:order_app/ui/bloc/login_cubit.dart';
-import 'package:order_app/ui/views/widgets/customTextField.dart';
+import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/ui/cubit/login_cubit.dart';
 import 'package:order_app/ui/views/registration.dart';
+import 'package:order_app/ui/widgets/customTextField.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
