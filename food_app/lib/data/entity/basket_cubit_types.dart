@@ -19,7 +19,6 @@ class BasketCubitTypes {
       totalPrice: totalPrice ?? this.totalPrice,
     );
   }
-
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

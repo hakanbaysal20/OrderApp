@@ -4,14 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:order_app/bottom_nav_bar.dart';
-import 'package:order_app/data/entity/basket_model.dart';
-import 'package:order_app/data/entity/basket_response.dart';
 import 'package:order_app/data/entity/product_model.dart';
 import 'package:order_app/data/entity/product_response.dart';
-import 'package:order_app/ui/views/login.dart';
-import 'package:order_app/ui/views/onboard/onboard.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductRepository{
   // Product Response
@@ -74,8 +68,6 @@ class ProductRepository{
     productList.sort(sortByWord);
     return productList;
   }
-
-
 
   // Basket Process
   Future<void> deleteProduct(int yemek_sepet_id) async{

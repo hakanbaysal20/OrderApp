@@ -17,8 +17,6 @@ void main() async{
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
-
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -32,8 +30,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OnboardCubit()),
         BlocProvider(create: (context) => ProductDetailsCubit()),
         BlocProvider(create: (context) => SplashCubit()),
-        BlocProvider(create: (context) => FavouriteCubit(),),
-        BlocProvider(create: (context) => ProfileCubit(),),
+        BlocProvider(create: (context) => FavouriteCubit()),
+        BlocProvider(create: (context) => ProfileCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
