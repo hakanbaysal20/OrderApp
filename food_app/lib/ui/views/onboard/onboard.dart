@@ -34,7 +34,7 @@ class _OnboardState extends State<Onboard> with SingleTickerProviderStateMixin {
               children: [
                 TextButton(
                     onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Login(),));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Login(),));
                 }, child: const Row(
                   children: [
                     Text("Login",style: TextStyle(color: ColorConstants.priceColor),),

@@ -1,6 +1,6 @@
 
 
-import 'package:order_app/enums/image_constants.dart';
+import 'package:order_app/data/enums/image_constants.dart';
 
 class OnboardModel{
   String image;

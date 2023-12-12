@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/data/constants/color_constants.dart';
 import 'package:order_app/data/constants/string_constants.dart';
+import 'package:order_app/data/enums/image_constants.dart';
 import 'package:order_app/ui/cubit/registration_cubit.dart';
 import 'package:order_app/ui/widgets/customTextField.dart';
 
@@ -33,30 +34,24 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+          leading: IconButton(onPressed: () {
+            Navigator.pop(context);
+            
+          }, icon: Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 30,)),
+          title: Text("Sign up",style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 26,color: ColorConstants.priceColor),)),
+      
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: screenWidth * 0.12),
-            Padding(
-              padding: EdgeInsets.only(left: screenWidth * 0.04),
-              child: Row(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }, icon: const Icon(Icons.arrow_back_ios,color: ColorConstants.priceColor,size: 35,)),
-                ],
-              ),
-            ),
-
-            Image.asset("assets/images/ic_logo.png",color: ColorConstants.priceColor,),
+            Image.asset(ImageConstants.appLogo.toPng),
             const Text("Foodi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'Roboto' ,fontSize: 42,fontWeight: FontWeight.w500)),
              Padding(
               padding: EdgeInsets.only(bottom: screenWidth * 0.04),
               child: const Text("Grab your favourite food",style: TextStyle(fontSize: 20,fontFamily: 'Roboto',color: ColorConstants.priceColor,fontWeight: FontWeight.w500),),
             ),
-            CustomTextField(obscureText: false, hintText: "Name", icon: const Icon(Icons.person_add,color: ColorConstants.priceColor,), controller: userNameController),
+            CustomTextField(obscureText: false, hintText: "Name & Surname", icon: const Icon(Icons.person_add,color: ColorConstants.priceColor,), controller: userNameController),
             CustomTextField(obscureText: false, hintText: "E-mail", icon: const Icon(Icons.mail_outline,color: ColorConstants.priceColor),controller: emailController,),
             Padding(
               padding: EdgeInsets.all(screenWidth * 0.04),

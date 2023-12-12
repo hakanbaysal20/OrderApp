@@ -9,7 +9,8 @@ enum ImageConstants {
   onboardDelivery('im_delivery'),
   backgroundImage('im_pattern'),
   onboardFav('im_onboard_fav'),
-  onboardOne('im_onboard_one');
+  onboardOne('im_onboard_one'),
+  appLogo('ic_logo');
   final String value;
 
   const ImageConstants(this.value);

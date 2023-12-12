@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/data/enums/image_constants.dart';
 import 'package:order_app/ui/cubit/login_cubit.dart';
 import 'package:order_app/ui/views/registration.dart';
 import 'package:order_app/ui/widgets/customTextField.dart';
@@ -25,7 +26,7 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: screenWidth * 0.15),
-            Image.asset("assets/images/ic_logo.png",color: ColorConstants.priceColor,),
+            Image.asset(ImageConstants.appLogo.toPng),
             const Text("Foodi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: 'Roboto' ,fontSize: 42,fontWeight: FontWeight.w500)),
             Padding(
               padding: EdgeInsets.only(bottom: screenWidth * 0.04),
