@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_app/data/constants/color_constants.dart';
+import 'package:order_app/data/constants/string_constants.dart';
 import 'package:order_app/ui/cubit/home_cubit.dart';
 
 class FilterSlide extends StatefulWidget {
@@ -24,21 +25,21 @@ class _FilterSlideState extends State<FilterSlide> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Sort by",style: TextStyle(fontFamily: 'SansPro',fontSize: 20,fontWeight: FontWeight.w500),),
+          const Text("Sort by",style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 20,fontWeight: FontWeight.w500),),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SortButtons("Fiyat", () {
+              SortButtons("Price", () {
                 context.read<HomeCubit>().sortAscByPriceProduct();
                 Navigator.of(context).pop();
 
               }, const Icon(Icons.keyboard_arrow_up,color: ColorConstants.white,)),
-              SortButtons("Fiyat", () {
+              SortButtons("Price", () {
                 context.read<HomeCubit>().sortDescByPriceProduct();
                 Navigator.of(context).pop();
 
               }, const Icon(Icons.keyboard_arrow_down,color: ColorConstants.white,)),
-              SortButtons("İsim", () {
+              SortButtons("Name", () {
                 context.read<HomeCubit>().sortByWordProduct();
                 Navigator.of(context).pop();
 
@@ -46,7 +47,7 @@ class _FilterSlideState extends State<FilterSlide> {
 
             ],
           ),
-          const Text("Filter",style: TextStyle(fontFamily: 'SansPro',fontSize: 20,fontWeight: FontWeight.w500),),
+          const Text("Filtering by price",style: TextStyle(fontFamily: StringConstants.primaryFontFamily,fontSize: 20,fontWeight: FontWeight.w500),),
           Text(priceValue.toInt().toString()),
           Slider(min: minValue ,max: 150,value: priceValue, onChanged: (value) {
             setState(() {
@@ -56,7 +57,7 @@ class _FilterSlideState extends State<FilterSlide> {
           TextButton(onPressed: () {
             context.read<HomeCubit>().filterProduct(priceValue.toInt(), 0);
             Navigator.of(context).pop();
-          }, child: const Text("Filtrele")),
+          }, child: const Text("Filter")),
 
         ],
       ),

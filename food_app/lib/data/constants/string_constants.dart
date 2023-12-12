@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 class StringConstants {
 
   const StringConstants._();
-  static const String menu = 'Menü';
-  static const String home = 'Anasayfa';
-  static const String profile = 'Profil';
-  static const String basket = 'Sepet';
-  static const String favorite = 'Favoriler';
-  static const String amount = 'adet';
+  static const String menu = 'Menu';
+  static const String home = 'Home';
+  static const String profile = 'Profile';
+  static const String basket = 'Cart';
+  static const String favorite = 'Favorite';
+  static const String amount = 'amount';
   static const String primaryFontFamily = 'SansPro';
   static const String total = 'Total';
   static const String getImage = 'http://kasimadalan.pe.hu/yemekler/resimler/';

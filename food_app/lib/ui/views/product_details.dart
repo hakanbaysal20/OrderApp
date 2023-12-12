@@ -67,7 +67,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 SnackBar(
                                   duration: Duration(seconds: 1),
                                   backgroundColor: ColorConstants.white,
-                                  content:Text("${widget.product.product_name} favorilere eklendi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
+                                  content:Text("${widget.product.product_name} added to favorites",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
                                 ),
                               );
                               Navigator.pop(context);
@@ -77,7 +77,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 SnackBar(
                                   duration: Duration(seconds: 1),
                                   backgroundColor: ColorConstants.white,
-                                  content:Text("${widget.product.product_name} favorilerden silindi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
+                                  content:Text("${widget.product.product_name} deleted from favorites",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
                                 ),
                               );
                               Navigator.pop(context);
@@ -185,7 +185,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         SnackBar(
                           duration: Duration(seconds: 1),
                           backgroundColor: ColorConstants.white,
-                          content:Text("${product.product_name} sepete eklendi",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
+                          content:Text("${product.product_name} added to card",style: TextStyle(color: ColorConstants.priceColor,fontFamily: StringConstants.primaryFontFamily,fontSize: 16),),
                         ),
                     );
                     Navigator.pop(context);

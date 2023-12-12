@@ -31,7 +31,7 @@ class GoogleNavBar extends StatelessWidget {
         tabs: const [
           GButton(padding: EdgeInsets.all(10),icon: Icons.home,text: "Home",iconColor: ColorConstants.priceColor),
           GButton(padding: EdgeInsets.all(10),icon: Icons.shopping_basket,text: "Basket",iconColor: ColorConstants.priceColor,),
-          GButton(padding: EdgeInsets.all(10),icon: Icons.favorite_outlined,text: "Favourite",iconColor: ColorConstants.priceColor,),
+          GButton(padding: EdgeInsets.all(10),icon: Icons.favorite_outlined,text: "Favorite",iconColor: ColorConstants.priceColor,),
           GButton(padding: EdgeInsets.all(10),icon: Icons.person,text: "Profile",iconColor: ColorConstants.priceColor,),
         ],
       ),
