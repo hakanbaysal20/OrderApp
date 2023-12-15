@@ -2,6 +2,7 @@
 
 ### MVVM Architecture
 ### Bloc Pattern
+### RESTful
 ### Shared Preferences
 ### Firebase
 
